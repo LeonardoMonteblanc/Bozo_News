@@ -1,0 +1,9 @@
+{
+  "total": 172080,
+  "com_texto_limpo": 172080,
+  "mention_bolsonaro": 20725,
+  "relevance_bolsonaro": 13441,
+  "sentimento_ok": 20904,
+  "ner_ok": 172080,
+  "topicos_ok": 20716
+}

@@ -1,0 +1,27 @@
+# ============ DADOS PESADOS (locais) ============
+banco/
+export_r2/
+work_data/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.parquet
+
+# ============ CACHE E CONFIG LOCAL ============
+.wrangler/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# ============ IDE / OS ============
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ============ LOGS ============
+*.log

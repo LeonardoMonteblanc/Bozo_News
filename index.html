@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corpus Bolsonaro 2019-2022</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  .tab-active { border-bottom: 3px solid #1e40af; color: #1e40af; font-weight: 600; }
+  .tab { border-bottom: 3px solid transparent; }
+  mark { background: #fde68a; padding: 0 2px; border-radius: 2px; }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .scroll-area { max-height: calc(100vh - 240px); overflow-y: auto; }
+  .modal-open { overflow: hidden; }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<!-- HEADER -->
+<header class="bg-slate-900 text-white shadow sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <div>
+      <h1 class="text-lg md:text-xl font-bold">Corpus Bolsonaro 2019-2022</h1>
+      <p class="text-xs text-slate-400" id="subtitulo">Carregando...</p>
+    </div>
+    <div class="flex gap-2">
+      <button onclick="exportarPDF()" class="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded">PDF</button>
+      <button onclick="abrirAjuda()" class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded">?</button>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="bg-white border-b">
+  <div class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto">
+    <button onclick="mudarAba('lista')" data-aba="lista" class="tab tab-active px-4 py-3 text-sm whitespace-nowrap">Notícias</button>
+    <button onclick="mudarAba('timeline')" data-aba="timeline" class="tab px-4 py-3 text-sm whitespace-nowrap">Timeline</button>
+    <button onclick="mudarAba('categorias')" data-aba="categorias" class="tab px-4 py-3 text-sm whitespace-nowrap">Categorias</button>
+    <button onclick="mudarAba('topicos')" data-aba="topicos" class="tab px-4 py-3 text-sm whitespace-nowrap">Tópicos</button>
+    <button onclick="mudarAba('entidades')" data-aba="entidades" class="tab px-4 py-3 text-sm whitespace-nowrap">Entidades</button>
+    <button onclick="mudarAba('rede')" data-aba="rede" class="tab px-4 py-3 text-sm whitespace-nowrap">Rede</button>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto p-4 grid grid-cols-12 gap-4">
+
+  <!-- SIDEBAR -->
+  <aside class="col-span-12 md:col-span-3 space-y-3" id="sidebar">
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Buscar</label>
+      <input id="q" type="text" placeholder="palavra-chave..." class="w-full mt-1 px-2 py-1.5 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Período</label>
+      <div class="grid grid-cols-2 gap-2 mt-1">
+        <input id="de" type="date" min="2019-01-01" max="2022-12-31" value="2019-01-01" class="px-2 py-1.5 border rounded text-xs">
+        <input id="ate" type="date" min="2019-01-01" max="2022-12-31" value="2022-12-31" class="px-2 py-1.5 border rounded text-xs">
+      </div>
+      <div class="flex gap-1 mt-2 flex-wrap">
+        <button onclick="atalhoAno('2019')" class="text-xs px-2 py-0.5 bg-slate-100 rounded hover:bg-slate-200">2019</button>
+        <button onclick="atalhoAno('2020')" class="text-xs px-2 py-0.5 bg-slate-100 rounded hover:bg-slate-200">2020</button>
+        <button onclick="atalhoAno('2021')" class="text-xs px-2 py-0.5 bg-slate-100 rounded hover:bg-slate-200">2021</button>
+        <button onclick="atalhoAno('2022')" class="text-xs px-2 py-0.5 bg-slate-100 rounded hover:bg-slate-200">2022</button>
+      </div>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Categoria</label>
+      <select id="categoria" class="w-full mt-1 px-2 py-1.5 border rounded text-sm"><option value="">todas</option></select>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Veículo</label>
+      <select id="dominio" class="w-full mt-1 px-2 py-1.5 border rounded text-sm"><option value="">todos</option></select>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Sentimento</label>
+      <select id="sentimento" class="w-full mt-1 px-2 py-1.5 border rounded text-sm">
+        <option value="">todos</option>
+        <option value="positivo">positivo</option>
+        <option value="negativo">negativo</option>
+        <option value="neutro">neutro</option>
+      </select>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Tópico LDA</label>
+      <select id="topico" class="w-full mt-1 px-2 py-1.5 border rounded text-sm"><option value="">todos</option></select>
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="text-xs font-semibold text-slate-600">Entidade</label>
+      <input id="entidade" type="text" placeholder="ex: Bolsonaro" class="w-full mt-1 px-2 py-1.5 border rounded text-sm">
+    </div>
+
+    <div class="bg-white p-3 rounded shadow-sm">
+      <label class="flex items-center gap-2 text-xs">
+        <input id="so_relevantes" type="checkbox" class="rounded">
+        <span class="font-semibold text-slate-600">Apenas notícias sobre Bolsonaro</span>
+      </label>
+    </div>
+
+    <button onclick="aplicarFiltros()" class="w-full bg-blue-600 text-white py-2 rounded font-semibold text-sm hover:bg-blue-700">Aplicar filtros</button>
+    <button onclick="limparTudo()" class="w-full bg-slate-200 py-2 rounded font-semibold text-sm hover:bg-slate-300">Limpar</button>
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <section class="col-span-12 md:col-span-9">
+
+    <div id="painel-lista" class="painel">
+      <div class="flex justify-between items-center mb-3">
+        <div id="total-info" class="text-sm text-slate-600"></div>
+        <div class="flex gap-2 items-center">
+          <button onclick="paginaAnterior()" id="btn-prev" class="px-3 py-1 bg-white border rounded text-sm hover:bg-slate-100 disabled:opacity-40">←</button>
+          <span id="pagina-info" class="text-sm text-slate-600"></span>
+          <button onclick="proximaPagina()" id="btn-next" class="px-3 py-1 bg-white border rounded text-sm hover:bg-slate-100 disabled:opacity-40">→</button>
+        </div>
+      </div>
+      <div id="lista" class="space-y-2 scroll-area"></div>
+      <div id="vazio" class="hidden text-center py-12 text-slate-400">Nenhum resultado.</div>
+      <div id="loading" class="hidden text-center py-12 text-slate-400">Carregando...</div>
+    </div>
+
+    <div id="painel-timeline" class="painel hidden">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h2 class="font-semibold text-slate-700 mb-3">Notícias por mês</h2>
+        <canvas id="chart-timeline" height="100"></canvas>
+      </div>
+    </div>
+
+    <div id="painel-categorias" class="painel hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="font-semibold text-slate-700 mb-3">Distribuição por categoria</h2>
+          <canvas id="chart-categorias" height="200"></canvas>
+        </div>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="font-semibold text-slate-700 mb-3">Distribuição por veículo (top 15)</h2>
+          <canvas id="chart-dominios" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="painel-topicos" class="painel hidden">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h2 class="font-semibold text-slate-700 mb-3">Tópicos identificados</h2>
+        <div id="lista-topicos" class="space-y-2 max-h-[70vh] overflow-y-auto"></div>
+      </div>
+    </div>
+
+    <div id="painel-entidades" class="painel hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="font-semibold text-slate-700 mb-3">Pessoas (PER)</h2>
+          <div id="lista-per" class="space-y-1 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <h2 class="font-semibold text-slate-700 mb-3">Organizações (ORG)</h2>
+          <div id="lista-org" class="space-y-1 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="painel-rede" class="painel hidden">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="font-semibold text-slate-700">Rede de co-ocorrência (PER)</h2>
+          <select id="rede-limite" onchange="carregarRede()" class="text-xs border rounded px-2 py-1">
+            <option value="20">Top 20</option>
+            <option value="30" selected>Top 30</option>
+            <option value="50">Top 50</option>
+          </select>
+        </div>
+        <div id="grafo-rede" style="height: 600px;" class="border rounded"></div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4" onclick="if(event.target===this) fecharModal()">
+  <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="p-4 border-b flex justify-between items-start sticky top-0 bg-white">
+      <div id="modal-titulo" class="font-bold text-lg pr-4"></div>
+      <button onclick="fecharModal()" class="text-slate-400 hover:text-slate-700 text-2xl leading-none">×</button>
+    </div>
+    <div id="modal-corpo" class="p-4 space-y-3"></div>
+  </div>
+</div>
+
+<!-- AJUDA -->
+<div id="ajuda" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4" onclick="if(event.target===this) fecharAjuda()">
+  <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full p-6">
+    <h3 class="font-bold text-lg mb-3">Como usar</h3>
+    <ul class="text-sm space-y-2 text-slate-700 list-disc pl-5">
+      <li><b>Notícias:</b> lista paginada com filtros</li>
+      <li><b>Timeline:</b> evolução mensal</li>
+      <li><b>Categorias:</b> distribuição por tema e veículo</li>
+      <li><b>Tópicos:</b> agrupamentos automáticos (BERTopic)</li>
+      <li><b>Entidades:</b> pessoas e organizações mais citadas</li>
+      <li><b>Rede:</b> grafo de co-ocorrência entre pessoas</li>
+      <li><b>PDF:</b> exporta a lista filtrada atual</li>
+    </ul>
+    <button onclick="fecharAjuda()" class="mt-4 w-full bg-blue-600 text-white py-2 rounded text-sm">Fechar</button>
+  </div>
+</div>
+
+<script>
+// ========================= ESTADO =========================
+const estado = {
+  aba: 'lista',
+  q: '', de: '2019-01-01', ate: '2022-12-31',
+  categoria: '', dominio: '', sentimento: '', topico: '', entidade: '',
+  so_relevantes: false,
+  ordenar: 'data_desc',
+  limit: 30, offset: 0, total: 0
+};
+
+// ========================= HELPERS =========================
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function fixMojibake(s) {
+  if (!s) return s;
+  // Corrige padrões conhecidos UTF-8 → Latin-1 mal decodificado
+  return String(s)
+    .replace(/Ã¡/g, 'á').replace(/Ã©/g, 'é').replace(/Ã/g, 'í')
+    .replace(/Ã³/g, 'ó').replace(/Ãº/g, 'ú').replace(/Ã£/g, 'ã')
+    .replace(/Ãµ/g, 'õ').replace(/Ã§/g, 'ç').replace(/Ã¢/g, 'â')
+    .replace(/Ãª/g, 'ê').replace(/Ã´/g, 'ô').replace(/Ã /g, 'à')
+    .replace(/Â/g, '').replace(/&#\\d+;/g, '');
+}
+
+function destacar(texto, termo) {
+  const t = esc(fixMojibake(texto));
+  if (!termo) return t;
+  const re = new RegExp(`(${termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return t.replace(re, '<mark>$1</mark>');
+}
+
+async function apiGet(rota) {
+  const r = await fetch(rota);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+function qs(obj) {
+  const p = new URLSearchParams();
+  Object.entries(obj).forEach(([k, v]) => {
+    if (v !== '' && v !== null && v !== undefined && v !== false) p.set(k, v);
+  });
+  return p.toString();
+}
+
+// ========================= INICIALIZAÇÃO =========================
+async function init() {
+  try {
+    const h = await apiGet('/health');
+    $('subtitulo').textContent = `${h.artigos_no_banco.toLocaleString('pt-BR')} notícias · 2019-2022`;
+  } catch (e) { $('subtitulo').textContent = 'erro ao conectar'; }
+
+  // Popula filtros
+  try {
+    const cats = await apiGet('/api/categorias');
+    cats.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.categoria; o.textContent = `${c.categoria} (${c.total.toLocaleString('pt-BR')})`;
+      $('categoria').appendChild(o);
+    });
+  } catch (e) {}
+
+  try {
+    const doms = await apiGet('/api/dominios?limite=50');
+    doms.forEach(d => {
+      const o = document.createElement('option');
+      o.value = d.domain; o.textContent = `${d.domain} (${d.total})`;
+      $('dominio').appendChild(o);
+    });
+  } catch (e) {}
+
+  try {
+    const tops = await apiGet('/api/topicos');
+    tops.slice(0, 60).forEach(t => {
+      const o = document.createElement('option');
+      o.value = t.topico_id;
+      const pal = (t.palavras || []).slice(0, 4).map(fixMojibake).join(', ');
+      o.textContent = `T${t.topico_id} (${t.total}): ${pal}`;
+      $('topico').appendChild(o);
+    });
+  } catch (e) {}
+
+  buscar();
+}
+
+// ========================= BUSCA =========================
+async function buscar() {
+  $('loading').classList.remove('hidden');
+  $('vazio').classList.add('hidden');
+  $('lista').innerHTML = '';
+
+  const params = {
+    q: estado.q, de: estado.de, ate: estado.ate,
+    categoria: estado.categoria, dominio: estado.dominio,
+    sentimento: estado.sentimento, topico: estado.topico,
+    entidade: estado.entidade,
+    so_relevantes: estado.so_relevantes || undefined,
+    ordenar: estado.ordenar,
+    limit: estado.limit, offset: estado.offset
+  };
+
+  try {
+    const d = await apiGet('/api/noticias?' + qs(params));
+    estado.total = d.total;
+    renderizarLista(d.itens);
+    atualizarInfo();
+  } catch (e) {
+    $('lista').innerHTML = `<div class="text-red-600 p-4">Erro: ${e.message}</div>`;
+  } finally {
+    $('loading').classList.add('hidden');
+  }
+}
+
+const CAT_COR = {
+  politica: 'bg-red-100 text-red-700',
+  economia: 'bg-emerald-100 text-emerald-700',
+  saude: 'bg-blue-100 text-blue-700',
+  mundo: 'bg-purple-100 text-purple-700',
+  esportes: 'bg-orange-100 text-orange-700',
+  meio_ambiente: 'bg-green-100 text-green-700',
+  outros: 'bg-slate-100 text-slate-600'
+};
+
+function renderizarLista(itens) {
+  if (!itens.length) { $('vazio').classList.remove('hidden'); return; }
+
+  $('lista').innerHTML = itens.map(n => {
+    const cat = CAT_COR[n.categoria] || CAT_COR.outros;
+    const per = (n.entidades_per || []).slice(0, 4).map(e =>
+      `<span class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+    const org = (n.entidades_org || []).slice(0, 2).map(e =>
+      `<span class="text-xs bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+
+    return `
+      <article class="bg-white p-3 rounded shadow-sm hover:shadow border-l-4 border-blue-500 cursor-pointer"
+               onclick="abrirDetalhe(${n.id})">
+        <div class="flex justify-between items-start gap-3">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1 text-xs">
+              <span class="font-semibold text-slate-700">${n.data || ''}</span>
+              <span class="px-1.5 py-0.5 rounded ${cat}">${esc(n.categoria || '')}</span>
+              ${n.sentimento_label ? `<span class="text-slate-500">${n.sentimento_label}</span>` : ''}
+              ${n.topico_id !== null && n.topico_id !== undefined ? `<span class="text-slate-400">T${n.topico_id}</span>` : ''}
+            </div>
+            <h3 class="font-semibold text-slate-800 leading-snug">${destacar(n.titulo, estado.q)}</h3>
+            ${per || org ? `<div class="flex flex-wrap gap-1 mt-2">${per} ${org}</div>` : ''}
+          </div>
+          <div class="text-right text-xs text-slate-400 whitespace-nowrap">${esc(n.sitename || '')}</div>
+        </div>
+      </article>`;
+  }).join('');
+}
+
+function atualizarInfo() {
+  const ini = estado.offset + 1;
+  const fim = Math.min(estado.offset + estado.limit, estado.total);
+  $('total-info').textContent = estado.total ? `${ini}-${fim} de ${estado.total.toLocaleString('pt-BR')}` : '';
+  const pg = Math.floor(estado.offset / estado.limit) + 1;
+  const tp = Math.ceil(estado.total / estado.limit) || 1;
+  $('pagina-info').textContent = `${pg} / ${tp}`;
+  $('btn-prev').disabled = estado.offset === 0;
+  $('btn-next').disabled = estado.offset + estado.limit >= estado.total;
+}
+
+// ========================= DETALHE =========================
+async function abrirDetalhe(id) {
+  try {
+    const n = await apiGet(`/api/noticia/${id}`);
+    $('modal-titulo').textContent = fixMojibake(n.titulo || '(sem título)');
+
+    const per = (n.entidades_per || []).map(e => `<span class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+    const org = (n.entidades_org || []).map(e => `<span class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+    const loc = (n.entidades_loc || []).map(e => `<span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+    const misc = (n.entidades_misc || []).map(e => `<span class="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(' ');
+    const pals = (n.palavras_chave || []).map(p => `<span class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">${esc(fixMojibake(p))}</span>`).join(' ');
+
+    $('modal-corpo').innerHTML = `
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="font-semibold">${n.data || ''}</span>
+        ${n.categoria ? `<span class="px-2 py-0.5 rounded bg-slate-100">${esc(n.categoria)}</span>` : ''}
+        ${n.sitename ? `<span class="text-slate-500">${esc(n.sitename)}</span>` : ''}
+        ${n.autor ? `<span class="text-slate-400">por ${esc(fixMojibake(n.autor))}</span>` : ''}
+        ${n.topico_id !== null ? `<span class="text-slate-400">Tópico T${n.topico_id}</span>` : ''}
+      </div>
+
+      ${n.resumo ? `<p class="text-slate-700 leading-relaxed">${esc(fixMojibake(n.resumo))}</p>` : ''}
+
+      ${pals ? `<div><div class="text-xs font-semibold text-slate-500 mb-1">Palavras-chave</div><div class="flex flex-wrap gap-1">${pals}</div></div>` : ''}
+
+      ${n.sentimento_label ? `<div class="border-t pt-3 text-sm"><b>Sentimento:</b> ${n.sentimento_label} (${n.sentimento_compound})</div>` : ''}
+
+      ${per ? `<div class="border-t pt-3"><div class="text-xs font-semibold text-slate-500 mb-1">Pessoas</div><div class="flex flex-wrap gap-1">${per}</div></div>` : ''}
+      ${org ? `<div class="border-t pt-3"><div class="text-xs font-semibold text-slate-500 mb-1">Organizações</div><div class="flex flex-wrap gap-1">${org}</div></div>` : ''}
+      ${loc ? `<div class="border-t pt-3"><div class="text-xs font-semibold text-slate-500 mb-1">Locais</div><div class="flex flex-wrap gap-1">${loc}</div></div>` : ''}
+      ${misc ? `<div class="border-t pt-3"><div class="text-xs font-semibold text-slate-500 mb-1">Outros</div><div class="flex flex-wrap gap-1">${misc}</div></div>` : ''}
+
+      ${n.texto_limpo ? `<details class="border-t pt-3"><summary class="text-xs font-semibold text-slate-500 cursor-pointer">Texto limpo (${n.texto_limpo.length} chars)</summary><p class="text-sm text-slate-600 mt-2 whitespace-pre-line">${esc(fixMojibake(n.texto_limpo))}</p></details>` : ''}
+
+      <div class="border-t pt-3">
+        <a href="${esc(n.url)}" target="_blank" class="text-blue-600 hover:underline text-sm">Abrir original ↗</a>
+      </div>
+    `;
+
+    $('modal').classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  } catch (e) { alert('Erro ao carregar detalhe: ' + e.message); }
+}
+
+function fecharModal() { $('modal').classList.add('hidden'); document.body.classList.remove('modal-open'); }
+function abrirAjuda() { $('ajuda').classList.remove('hidden'); }
+function fecharAjuda() { $('ajuda').classList.add('hidden'); }
+
+// ========================= TABS =========================
+function mudarAba(nome) {
+  estado.aba = nome;
+  document.querySelectorAll('.painel').forEach(p => p.classList.add('hidden'));
+  $('painel-' + nome).classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+  document.querySelector(`[data-aba="${nome}"]`).classList.add('tab-active');
+
+  if (nome === 'timeline') carregarTimeline();
+  if (nome === 'categorias') carregarCategorias();
+  if (nome === 'topicos') carregarTopicos();
+  if (nome === 'entidades') carregarEntidades();
+  if (nome === 'rede') carregarRede();
+}
+
+// ========================= TIMELINE =========================
+let chartTimeline = null;
+async function carregarTimeline() {
+  const dados = await apiGet(`/api/timeline?de=${estado.de}&ate=${estado.ate}&so_relevantes=${estado.so_relevantes}`);
+  const ctx = $('chart-timeline');
+  if (chartTimeline) chartTimeline.destroy();
+  chartTimeline = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dados.map(d => d.mes),
+      datasets: [{
+        label: 'Notícias', data: dados.map(d => d.total),
+        borderColor: '#1e40af', backgroundColor: 'rgba(30,64,175,0.1)',
+        fill: true, tension: 0.3, pointRadius: 0
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } },
+      scales: { x: { ticks: { maxRotation: 90, minRotation: 90, font: { size: 9 } } } } }
+  });
+}
+
+// ========================= CATEGORIAS =========================
+let chartCategorias = null, chartDominios = null;
+async function carregarCategorias() {
+  const cats = await apiGet('/api/categorias');
+  const doms = await apiGet('/api/dominios?limite=15');
+
+  if (chartCategorias) chartCategorias.destroy();
+  chartCategorias = new Chart($('chart-categorias'), {
+    type: 'doughnut',
+    data: {
+      labels: cats.map(c => c.categoria),
+      datasets: [{ data: cats.map(c => c.total),
+        backgroundColor: ['#dc2626','#0891b2','#16a34a','#9333ea','#ea580c','#65a30d','#64748b'] }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+  });
+
+  if (chartDominios) chartDominios.destroy();
+  chartDominios = new Chart($('chart-dominios'), {
+    type: 'bar',
+    data: {
+      labels: doms.map(d => d.domain),
+      datasets: [{ data: doms.map(d => d.total), backgroundColor: '#1e40af' }]
+    },
+    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+      scales: { y: { ticks: { font: { size: 10 } } } } }
+  });
+}
+
+// ========================= TÓPICOS =========================
+async function carregarTopicos() {
+  const tops = await apiGet('/api/topicos');
+  $('lista-topicos').innerHTML = tops.map(t => {
+    const pals = (t.palavras || []).map(p => esc(fixMojibake(p))).join(', ');
+    return `
+      <div class="flex gap-3 p-2 hover:bg-slate-50 rounded cursor-pointer"
+           onclick="filtrarPorTopico(${t.topico_id})">
+        <div class="w-16 shrink-0 text-xs text-slate-500">T${t.topico_id}</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-700">${pals}</div>
+        </div>
+        <div class="w-20 shrink-0 text-right text-xs text-slate-500">${t.total} notícias</div>
+      </div>`;
+  }).join('');
+}
+
+function filtrarPorTopico(id) {
+  $('topico').value = id;
+  estado.topico = id;
+  estado.offset = 0;
+  mudarAba('lista');
+  buscar();
+}
+
+// ========================= ENTIDADES =========================
+async function carregarEntidades() {
+  const d = await apiGet('/api/entidades?limite=50');
+
+  const renderLista = (arr, cor) => arr.map((e, i) => `
+    <div class="flex justify-between items-center text-sm py-1 border-b border-slate-100 cursor-pointer hover:bg-slate-50"
+         onclick="filtrarPorEntidade('${esc(e.nome).replace(/'/g, "\\'")}')">
+      <span class="truncate"><span class="text-xs text-slate-400 w-6 inline-block">${i+1}</span> ${esc(fixMojibake(e.nome))}</span>
+      <span class="text-xs ${cor} font-semibold">${e.total}</span>
+    </div>
+  `).join('');
+
+  $('lista-per').innerHTML = renderLista(d.per, 'text-red-700');
+  $('lista-org').innerHTML = renderLista(d.org, 'text-blue-700');
+}
+
+function filtrarPorEntidade(nome) {
+  $('entidade').value = nome;
+  estado.entidade = nome;
+  estado.offset = 0;
+  mudarAba('lista');
+  buscar();
+}
+
+// ========================= REDE =========================
+let redeNetwork = null;
+async function carregarRede() {
+  const limite = parseInt($('rede-limite').value, 10);
+  const d = await apiGet(`/api/rede?limite=${limite}`);
+
+  if (!d.nos.length) {
+    $('grafo-rede').innerHTML = '<div class="text-center py-12 text-slate-400">Sem dados para exibir</div>';
+    return;
+  }
+
+  const nos = d.nos.map(n => ({
+    id: n.id, label: fixMojibake(n.id),
+    value: n.total,
+    font: { size: Math.min(20, 8 + Math.log(n.total + 1) * 1.5) }
+  }));
+  const arestas = d.arestas.map(a => ({
+    from: a.source, to: a.target, value: a.peso,
+    title: `${a.peso} co-ocorrências`,
+    width: Math.min(6, 1 + Math.log(a.peso))
+  }));
+
+  const data = { nodes: new vis.DataSet(nos), edges: new vis.DataSet(arestas) };
+  const opts = {
+    nodes: { shape: 'dot', scaling: { min: 8, max: 30 } },
+    edges: { color: { opacity: 0.4 }, smooth: false },
+    physics: { stabilization: { iterations: 200 }, barnesHut: { gravitationalConstant: -8000 } },
+    interaction: { hover: true, tooltipDelay: 200 }
+  };
+
+  if (redeNetwork) redeNetwork.destroy();
+  redeNetwork = new vis.Network($('grafo-rede'), data, opts);
+
+  redeNetwork.on('click', params => {
+    if (params.nodes.length > 0) filtrarPorEntidade(params.nodes[0]);
+  });
+}
+
+// ========================= FILTROS =========================
+function aplicarFiltros() {
+  estado.q = $('q').value.trim();
+  estado.de = $('de').value;
+  estado.ate = $('ate').value;
+  estado.categoria = $('categoria').value;
+  estado.dominio = $('dominio').value;
+  estado.sentimento = $('sentimento').value;
+  estado.topico = $('topico').value;
+  estado.entidade = $('entidade').value.trim();
+  estado.so_relevantes = $('so_relevantes').checked;
+  estado.offset = 0;
+  buscar();
+}
+
+function limparTudo() {
+  $('q').value = ''; $('de').value = '2019-01-01'; $('ate').value = '2022-12-31';
+  $('categoria').value = ''; $('dominio').value = ''; $('sentimento').value = '';
+  $('topico').value = ''; $('entidade').value = ''; $('so_relevantes').checked = false;
+  aplicarFiltros();
+}
+
+function atalhoAno(a) {
+  $('de').value = `${a}-01-01`; $('ate').value = `${a}-12-31`;
+  aplicarFiltros();
+}
+
+function proximaPagina() {
+  if (estado.offset + estado.limit < estado.total) {
+    estado.offset += estado.limit; buscar(); window.scrollTo(0, 0);
+  }
+}
+function paginaAnterior() {
+  if (estado.offset > 0) {
+    estado.offset = Math.max(0, estado.offset - estado.limit);
+    buscar(); window.scrollTo(0, 0);
+  }
+}
+
+// Debounce busca
+let timer;
+$('q').addEventListener('input', () => {
+  clearTimeout(timer);
+  timer = setTimeout(() => { estado.q = $('q').value.trim(); estado.offset = 0; buscar(); }, 400);
+});
+
+// ========================= PDF =========================
+function exportarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+  doc.setFontSize(16);
+  doc.text('Corpus Bolsonaro 2019-2022', 40, 50);
+  doc.setFontSize(10);
+  doc.setTextColor(100);
+  doc.text(`Período: ${estado.de} a ${estado.ate}`, 40, 70);
+  doc.text(`Total: ${estado.total} notícias`, 40, 84);
+  doc.text(`Gerado: ${new Date().toLocaleString('pt-BR')}`, 40, 98);
+
+  const itens = document.querySelectorAll('#lista article');
+  let y = 130;
+  const margem = 40, larguraMax = 515;
+
+  itens.forEach((el, i) => {
+    const titulo = el.querySelector('h3')?.textContent || '';
+    const data = el.querySelector('.text-slate-700')?.textContent || '';
+    const site = el.querySelector('.text-slate-400')?.textContent || '';
+
+    if (y > 780) { doc.addPage(); y = 50; }
+
+    doc.setTextColor(30);
+    doc.setFontSize(9);
+    doc.text(`${data} · ${site}`, margem, y);
+    y += 12;
+
+    doc.setFontSize(10);
+    const linhas = doc.splitTextToSize(fixMojibake(titulo), larguraMax);
+    doc.text(linhas, margem, y);
+    y += linhas.length * 12 + 8;
+  });
+
+  doc.save(`bolsonaro-${estado.de}-${estado.ate}.pdf`);
+}
+
+// ========================= INIT =========================
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { fecharModal(); fecharAjuda(); }
+});
+init();
+</script>
+</body>
+</html>
