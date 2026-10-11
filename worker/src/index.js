@@ -123,9 +123,11 @@ async function handleNoticias(env, url) {
   }
   if (sentimento) { where.push("sentimento_label = ?"); binds.push(sentimento); }
   if (entidade) {
-    where.push("(entidades_per LIKE ? OR entidades_org LIKE ?)");
-    binds.push(`%${entidade}%`);
-    binds.push(`%${entidade}%`);
+    // Escapa % e _ para evitar match indevido
+    const safe = entidade.replace(/[%_\\]/g, m => "\\" + m);
+    where.push("(entidades_per LIKE ? ESCAPE '\\' OR entidades_org LIKE ? ESCAPE '\\')");
+    binds.push(`%${safe}%`);
+    binds.push(`%${safe}%`);
   }
 
   const whereSQL = where.join(" AND ");
