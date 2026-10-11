@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corpus Bolsonaro · 2019–2022</title>
+<meta name="description" content="Explorador de notícias sobre o governo Bolsonaro (2019-2022)">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: 'class' };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tema-saude: #0891b2;
+    --tema-politica: #dc2626;
+    --tema-economia: #65a30d;
+    --tema-judiciario: #7c3aed;
+    --tema-internacional: #059669;
+    --tema-eleicoes: #4338ca;
+    --tema-comunicacao: #db2777;
+    --tema-investigacao: #b45309;
+  }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  .font-display { font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; }
+  .skip-link { position: absolute; top: -100px; left: 0; background: #111827; color: white; padding: 0.5rem 1rem; z-index: 100; }
+  .skip-link:focus { top: 0; }
+  *:focus-visible { outline: 2px solid #dc2626; outline-offset: 2px; border-radius: 2px; }
+  mark { background: #fef3c7; padding: 0 2px; border-radius: 2px; }
+  .dark mark { background: #92400e; color: #fff; }
+  .noticia-lida { opacity: 0.5; }
+  .noticia-lida .titulo { text-decoration: line-through; text-decoration-color: #cbd5e1; }
+  .chip-filter { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.15rem 0.55rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 500; }
+  .card-topico { transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+  .card-topico:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); }
+  .chip-palavra { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 9999px; background: #f1f5f9; color: #475569; transition: all 0.12s; cursor: pointer; border: 1px solid transparent; }
+  .chip-palavra:hover { background: white; border-color: currentColor; }
+  .dark .chip-palavra { background: #334155; color: #cbd5e1; }
+  .dark .chip-palavra:hover { background: #1e293b; }
+  .panel-tab { padding: 0.5rem 0.9rem; font-size: 0.8rem; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+  .panel-tab:hover { color: #dc2626; }
+  .panel-tab.active { border-bottom-color: #dc2626; color: #dc2626; font-weight: 600; }
+  .dark .panel-tab.active { color: #f87171; border-color: #f87171; }
+  .fade-in { animation: fadeIn 0.2s ease-in; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(3px);} to { opacity: 1; transform: translateY(0);} }
+  .sort-header { cursor: pointer; user-select: none; }
+  .sort-header:hover, .sort-header.active { color: #dc2626; }
+  .dark .sort-header:hover, .dark .sort-header.active { color: #f87171; }
+  .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); padding: 0.55rem 1.1rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 100; animation: fadeIn 0.2s ease-in; font-size: 0.85rem; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  .stat-card { background: linear-gradient(to bottom, white, #fafafa); }
+  .dark .stat-card { background: linear-gradient(to bottom, #1e293b, #0f172a); }
+</style>
+</head>
+<body class="bg-stone-50 dark:bg-slate-950 text-stone-900 dark:text-slate-100 transition-colors antialiased">
+
+<a href="#conteudo" class="skip-link">Pular para conteúdo</a>
+
+<!-- ========================= HEADER ========================= -->
+<header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-stone-200 dark:border-slate-800 sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="w-2.5 h-2.5 rounded-full bg-red-700"></span>
+      <span class="font-display text-base">Corpus Bolsonaro</span>
+      <span class="hidden sm:inline text-xs text-stone-400 dark:text-slate-500">2019–2022</span>
+    </div>
+
+    <div class="flex-1 max-w-lg mx-auto relative">
+      <input id="busca-global" type="search"
+             placeholder="Buscar tópico, palavra, entidade... (Ctrl+K)"
+             class="w-full px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-stone-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-stone-400 dark:focus:border-slate-500 transition-colors"
+             autocomplete="off" aria-label="Busca global">
+      <div id="busca-dropdown" class="hidden absolute top-full mt-1 left-0 right-0 bg-white dark:bg-slate-800 shadow-xl rounded-md border border-stone-200 dark:border-slate-700 z-50 max-h-96 overflow-y-auto" role="listbox"></div>
+    </div>
+
+    <div class="flex items-center gap-1 shrink-0">
+      <button onclick="toggleDark()" id="btn-dark" class="text-base leading-none w-9 h-9 rounded-md hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Alternar tema" title="Modo escuro/claro">🌙</button>
+      <button onclick="exportarPDF()" class="hidden sm:inline text-xs bg-red-700 hover:bg-red-800 text-white px-3 py-2 rounded-md font-medium transition">PDF</button>
+      <button onclick="abrirAjuda()" class="text-xs w-9 h-9 rounded-md bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700" aria-label="Ajuda">?</button>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo" class="max-w-7xl mx-auto px-4 py-6">
+
+  <!-- ========================= HERO ========================= -->
+  <section class="mb-8">
+    <h1 class="font-display text-3xl md:text-4xl mb-2 leading-tight">
+      Explorador do corpus presidencial
+    </h1>
+    <p class="text-stone-600 dark:text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed mb-6">
+      Mais de 20 mil notícias sobre o governo Bolsonaro, extraídas de veículos brasileiros entre 2019 e 2022, organizadas em temas, entidades e palavras-chave.
+    </p>
+
+    <div id="stat-cards" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+  </section>
+
+  <!-- ========================= FILTROS ATIVOS ========================= -->
+  <div id="chips-bar" class="mb-6 flex gap-2 flex-wrap items-center min-h-[2rem]">
+    <span id="chips-vazio" class="text-xs text-stone-400 dark:text-slate-500">Nenhum filtro ativo. Clique em um tópico ou palavra para começar.</span>
+    <div id="chips-container" class="flex gap-2 flex-wrap"></div>
+    <button id="btn-limpar" onclick="limparTudo()" class="hidden text-xs text-red-700 dark:text-red-400 hover:underline ml-2">limpar tudo</button>
+  </div>
+
+  <!-- ========================= GRID DE TÓPICOS ========================= -->
+  <section class="mb-8">
+    <div class="flex items-baseline justify-between mb-3">
+      <h2 class="font-display text-xl">Tópicos</h2>
+      <span class="text-xs text-stone-500 dark:text-slate-500">12 temas · clique para explorar</span>
+    </div>
+    <div id="grid-topicos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+  </section>
+
+  <!-- ========================= RESULTADOS ========================= -->
+  <section id="resultados" class="bg-white dark:bg-slate-900 rounded-lg border border-stone-200 dark:border-slate-800">
+    <div class="border-b border-stone-200 dark:border-slate-800 flex overflow-x-auto">
+      <button data-painel="noticias" class="panel-tab active" onclick="mudarPainel('noticias')">Notícias</button>
+      <button data-painel="timeline" class="panel-tab" onclick="mudarPainel('timeline')">Timeline</button>
+      <button data-painel="entidades" class="panel-tab" onclick="mudarPainel('entidades')">Entidades</button>
+      <button data-painel="rede" class="panel-tab" onclick="mudarPainel('rede')">Rede</button>
+      <button data-painel="filtros" class="panel-tab" onclick="mudarPainel('filtros')">Mais filtros</button>
+    </div>
+
+    <!-- Notícias -->
+    <div id="painel-noticias" class="painel p-4">
+      <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
+        <div id="noticias-info" class="text-sm text-stone-600 dark:text-slate-400"></div>
+        <div class="flex gap-3 items-center text-xs">
+          <label class="flex items-center gap-1 cursor-pointer">
+            <input id="ocultar-lidas" type="checkbox" onchange="aplicarFiltros()"> Ocultar lidas
+          </label>
+          <button onclick="marcarTodasLidas()" class="text-stone-500 hover:text-stone-900 dark:text-slate-400 dark:hover:text-slate-100">marcar todas</button>
+          <span class="text-stone-300 dark:text-slate-600">·</span>
+          <span id="lidas-contador" class="text-stone-500 dark:text-slate-400"></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-2 text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500 border-b border-stone-200 dark:border-slate-800 pb-2 mb-2">
+        <div class="col-span-2 sort-header" data-sort="data" onclick="ordenarPor('data')">Data <span class="sort-icon"></span></div>
+        <div class="col-span-7 sort-header" data-sort="titulo" onclick="ordenarPor('titulo')">Título <span class="sort-icon"></span></div>
+        <div class="col-span-2 sort-header" data-sort="sitename" onclick="ordenarPor('sitename')">Veículo <span class="sort-icon"></span></div>
+        <div class="col-span-1 text-right">Estado</div>
+      </div>
+
+      <div id="noticias-lista" class="divide-y divide-stone-100 dark:divide-slate-800" aria-live="polite"></div>
+      <div id="noticias-vazio" class="hidden text-center py-16 text-stone-400 dark:text-slate-500">
+        <div class="text-3xl mb-2">∅</div>
+        <div class="text-sm">Nenhum resultado com esses filtros.</div>
+      </div>
+
+      <div class="flex justify-center items-center gap-2 mt-6">
+        <button onclick="paginaAnterior()" id="btn-prev" class="px-3 py-1.5 border border-stone-200 dark:border-slate-700 rounded-md text-sm hover:bg-stone-50 dark:hover:bg-slate-800 disabled:opacity-40">← anterior</button>
+        <span id="pagina-info" class="text-sm text-stone-600 dark:text-slate-400"></span>
+        <button onclick="proximaPagina()" id="btn-next" class="px-3 py-1.5 border border-stone-200 dark:border-slate-700 rounded-md text-sm hover:bg-stone-50 dark:hover:bg-slate-800 disabled:opacity-40">próxima →</button>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div id="painel-timeline" class="painel hidden p-6">
+      <h3 class="font-display text-lg mb-4">Evolução mensal</h3>
+      <canvas id="chart-timeline" height="70"></canvas>
+    </div>
+
+    <!-- Entidades -->
+    <div id="painel-entidades" class="painel hidden p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-display text-lg mb-3">Pessoas</h3>
+          <div id="lista-per" class="space-y-1 text-sm"></div>
+        </div>
+        <div>
+          <h3 class="font-display text-lg mb-3">Organizações</h3>
+          <div id="lista-org" class="space-y-1 text-sm"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rede -->
+    <div id="painel-rede" class="painel hidden p-6">
+      <h3 class="font-display text-lg mb-3">Co-ocorrência de pessoas</h3>
+      <div id="grafo-rede" style="height: 500px;" class="border border-stone-200 dark:border-slate-800 rounded-md bg-stone-50 dark:bg-slate-950"></div>
+    </div>
+
+    <!-- Filtros avançados -->
+    <div id="painel-filtros" class="painel hidden p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">Categoria</label>
+          <select id="f-categoria" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800"><option value="">todas</option></select>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">Veículo</label>
+          <select id="f-dominio" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800"><option value="">todos</option></select>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">Sentimento</label>
+          <select id="f-sentimento" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800">
+            <option value="">todos</option>
+            <option value="positivo">positivo</option>
+            <option value="negativo">negativo</option>
+            <option value="neutro">neutro</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">De</label>
+          <input id="f-de" type="date" min="2019-01-01" max="2022-12-31" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800">
+        </div>
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">Até</label>
+          <input id="f-ate" type="date" min="2019-01-01" max="2022-12-31" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800">
+        </div>
+        <div>
+          <label class="text-xs font-medium text-stone-600 dark:text-slate-400">Entidade</label>
+          <input id="f-entidade" type="text" placeholder="ex: Bolsonaro" class="w-full mt-1 px-3 py-2 border border-stone-200 dark:border-slate-700 rounded-md text-sm bg-white dark:bg-slate-800">
+        </div>
+      </div>
+      <div class="mt-4 flex gap-2">
+        <button onclick="aplicarFiltrosAvancados()" class="bg-red-700 hover:bg-red-800 text-white text-sm px-4 py-2 rounded-md font-medium">Aplicar</button>
+        <button onclick="limparFiltrosAvancados()" class="bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-sm px-4 py-2 rounded-md">Limpar</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================= MODAL NOTÍCIA ========================= -->
+<div id="modal-noticia" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this) fecharNoticia()">
+  <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto fade-in" role="dialog" aria-modal="true">
+    <div class="p-5 border-b border-stone-200 dark:border-slate-800 flex justify-between items-start sticky top-0 bg-white dark:bg-slate-900 z-10">
+      <h3 id="modal-titulo" class="font-display text-lg pr-4 leading-tight"></h3>
+      <button onclick="fecharNoticia()" class="text-stone-400 hover:text-stone-700 dark:hover:text-slate-200 text-2xl leading-none w-8 h-8" aria-label="Fechar">×</button>
+    </div>
+    <div id="modal-corpo" class="p-5 space-y-4"></div>
+  </div>
+</div>
+
+<!-- ========================= MODAL BUSCA ========================= -->
+<div id="modal-busca" class="hidden fixed inset-0 bg-black/60 z-50 flex items-start justify-center pt-[10vh] p-4" onclick="if(event.target===this) fecharBusca()">
+  <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl max-w-2xl w-full fade-in" role="dialog" aria-modal="true">
+    <div class="p-4 border-b border-stone-200 dark:border-slate-800 flex items-center gap-3">
+      <span class="text-stone-400">🔍</span>
+      <input id="busca-modal-input" type="search" placeholder="Buscar..." class="flex-1 outline-none text-base bg-transparent" autocomplete="off">
+      <kbd class="text-xs text-stone-400 border border-stone-300 dark:border-slate-600 px-2 py-0.5 rounded">Esc</kbd>
+    </div>
+    <div id="busca-modal-resultados" class="max-h-[60vh] overflow-y-auto p-2"></div>
+  </div>
+</div>
+
+<!-- ========================= AJUDA ========================= -->
+<div id="modal-ajuda" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onclick="if(event.target===this) fecharAjuda()">
+  <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl max-w-lg w-full p-6 fade-in" role="dialog" aria-modal="true">
+    <h3 class="font-display text-xl mb-4">Como explorar</h3>
+    <ul class="text-sm space-y-2 text-stone-700 dark:text-slate-300">
+      <li><b>Tópicos:</b> 12 temas macro identificados automaticamente nas notícias.</li>
+      <li><b>Clique em um tópico:</b> filtra notícias, entidades e timeline.</li>
+      <li><b>Clique em uma palavra:</b> busca por ela.</li>
+      <li><b>Chips no topo:</b> remova filtros individualmente.</li>
+      <li><b>Ctrl+K:</b> busca global.</li>
+      <li><b>🌙:</b> modo escuro.</li>
+      <li><b>Notícias relacionadas:</b> aparecem dentro de cada notícia.</li>
+    </ul>
+    <button onclick="fecharAjuda()" class="mt-5 w-full bg-red-700 hover:bg-red-800 text-white py-2.5 rounded-md text-sm font-medium">Fechar</button>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// CONFIG E ESTADO
+// ============================================================================
+
+const API_BASE = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  ? ""
+  : "https://bozo-news-api.bitsmarxistas.workers.dev";
+
+const DEBUG = new URLSearchParams(location.search).get("debug") === "1";
+
+// Paleta temática — cada tópico tem uma cor semântica
+const TEMA_CORES = {
+  100: "#0891b2", // Pandemia — saúde (ciano)
+  11:  "#7c3aed", // STF — judiciário (roxo)
+  13:  "#dc2626", // Lula/PT — política (vermelho)
+  9:   "#ea580c", // Bolsonaro/Alvorada — presidência (laranja)
+  1:   "#65a30d", // Combustíveis — economia (verde)
+  5:   "#991b1b", // Manifestações — conflito (vermelho escuro)
+  4:   "#db2777", // Fake news — comunicação (rosa)
+  7:   "#0d9488", // Moro — justiça (teal)
+  3:   "#2563eb", // Saúde/hospitais — saúde (azul)
+  12:  "#4338ca", // Eleições SP — eleições (índigo)
+  10:  "#b45309", // PF — investigação (âmbar)
+  8:   "#059669", // América Latina — internacional (esmeralda)
+};
+
+function corTopico(id) {
+  return TEMA_CORES[id] || "#64748b";
+}
+
+const estado = {
+  q: "", de: "", ate: "", categoria: "", dominio: "", sentimento: "",
+  topico: "", entidade: "", so_relevantes: false, ocultar_lidas: false,
+  ordenar: "data_desc", ordem_coluna: "data", ordem_dir: "desc",
+  limit: 30, offset: 0, total: 0,
+  painel: "noticias", topicoSelecionado: null, palavraSelecionada: "",
+};
+
+const lidas = new Set(JSON.parse(localStorage.getItem("lidas") || "[]"));
+let topicosCache = [];
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function fixMojibake(s) {
+  if (!s) return s;
+  return String(s)
+    .replace(/Ã¡/g, "á").replace(/Ã©/g, "é").replace(/Ã/g, "í")
+    .replace(/Ã³/g, "ó").replace(/Ãº/g, "ú").replace(/Ã£/g, "ã")
+    .replace(/Ãµ/g, "õ").replace(/Ã§/g, "ç").replace(/Ã¢/g, "â")
+    .replace(/Ãª/g, "ê").replace(/Ã´/g, "ô").replace(/Ã /g, "à")
+    .replace(/Â/g, "");
+}
+
+function destacar(texto, termo) {
+  const t = esc(fixMojibake(texto));
+  if (!termo) return t;
+  const re = new RegExp(`(${termo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+  return t.replace(re, "<mark>$1</mark>");
+}
+
+async function apiGet(rota) {
+  const r = await fetch(API_BASE + rota);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+function qs(obj) {
+  const p = new URLSearchParams();
+  Object.entries(obj).forEach(([k, v]) => {
+    if (v !== "" && v !== null && v !== undefined && v !== false) p.set(k, v);
+  });
+  return p.toString();
+}
+
+function toast(msg, cor = "bg-stone-900 text-white dark:bg-slate-700") {
+  const el = document.createElement("div");
+  el.className = `toast ${cor}`;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
+}
+
+// ============================================================================
+// DARK MODE
+// ============================================================================
+
+function initDark() {
+  const salvo = localStorage.getItem("dark");
+  const prefere = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const ativo = salvo === "1" || (salvo === null && prefere);
+  document.documentElement.classList.toggle("dark", ativo);
+  $("btn-dark").textContent = ativo ? "☀️" : "🌙";
+}
+
+function toggleDark() {
+  const ativo = !document.documentElement.classList.contains("dark");
+  document.documentElement.classList.toggle("dark", ativo);
+  localStorage.setItem("dark", ativo ? "1" : "0");
+  $("btn-dark").textContent = ativo ? "☀️" : "🌙";
+}
+
+// ============================================================================
+// INIT
+// ============================================================================
+
+async function init() {
+  initDark();
+
+  await carregarStatCards();
+  await Promise.all([
+    carregarTopicosGrid(),
+    popularFiltrosAvancados(),
+  ]);
+
+  atualizarLidasContador();
+  buscar();
+}
+
+async function carregarStatCards() {
+  try {
+    const h = await apiGet("/health");
+    const topicos = await apiGet("/api/topicos");
+
+    $("stat-cards").innerHTML = `
+      <div class="stat-card rounded-lg border border-stone-200 dark:border-slate-800 p-4">
+        <div class="text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500 mb-1">Notícias</div>
+        <div class="font-display text-2xl">${h.artigos_no_banco.toLocaleString("pt-BR")}</div>
+      </div>
+      <div class="stat-card rounded-lg border border-stone-200 dark:border-slate-800 p-4">
+        <div class="text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500 mb-1">Tópicos</div>
+        <div class="font-display text-2xl">${topicos.length}</div>
+      </div>
+      <div class="stat-card rounded-lg border border-stone-200 dark:border-slate-800 p-4">
+        <div class="text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500 mb-1">Período</div>
+        <div class="font-display text-2xl">4 anos</div>
+      </div>
+      <div class="stat-card rounded-lg border border-stone-200 dark:border-slate-800 p-4">
+        <div class="text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500 mb-1">Maior tópico</div>
+        <div class="font-display text-2xl truncate">${topicos[0]?.nome?.split(" ").slice(0, 2).join(" ") || "—"}</div>
+      </div>
+    `;
+  } catch (e) {
+    $("stat-cards").innerHTML = `<div class="col-span-4 text-red-600 text-sm">Erro ao carregar estatísticas.</div>`;
+  }
+}
+
+// ============================================================================
+// GRID DE TÓPICOS
+// ============================================================================
+
+async function carregarTopicosGrid() {
+  try {
+    const dados = await apiGet("/api/topicos_com_palavras?limite=12&palavras_por_topico=10");
+    topicosCache = dados;
+    renderTopicosGrid(dados);
+  } catch (e) {
+    $("grid-topicos").innerHTML = `<div class="col-span-3 text-red-600">Erro: ${e.message}</div>`;
+  }
+}
+
+function renderTopicosGrid(topicos) {
+  $("grid-topicos").innerHTML = topicos.map(t => {
+    const cor = corTopico(t.id);
+    const palavras = (t.palavras_top || []).slice(0, 8);
+    const ativo = estado.topicoSelecionado === t.id;
+
+    return `
+      <article class="card-topico rounded-lg border p-4 bg-white dark:bg-slate-900 ${ativo ? 'ring-2' : ''}"
+               style="border-color: ${cor}30; ${ativo ? `--tw-ring-color: ${cor};` : ''}"
+               onclick="selecionarTopico(${t.id})" role="button" tabindex="0"
+               onkeydown="if(event.key==='Enter')selecionarTopico(${t.id})">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="font-display text-base leading-tight" style="color: ${cor}">${esc(t.nome)}</h3>
+          <span class="text-xs text-stone-400 dark:text-slate-500 tabular-nums shrink-0 ml-2">${t.total.toLocaleString("pt-BR")}</span>
+        </div>
+        <div class="flex flex-wrap gap-1">
+          ${palavras.map(p => `
+            <button class="chip-palavra"
+                    style="color: ${cor}"
+                    onclick="event.stopPropagation(); selecionarPalavra('${esc(p.palavra).replace(/'/g, "\\'")}')"
+                    title="${p.total} ocorrências">
+              ${esc(fixMojibake(p.palavra))}
+            </button>
+          `).join("")}
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+// ============================================================================
+// SELEÇÃO E CHIPS
+// ============================================================================
+
+function selecionarPalavra(p) {
+  estado.palavraSelecionada = p;
+  estado.q = p;
+  estado.offset = 0;
+  atualizarChips();
+  mudarPainel("noticias");
+  buscar();
+  $("resultados").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function selecionarTopico(id) {
+  if (estado.topicoSelecionado === id) {
+    estado.topicoSelecionado = null;
+    estado.topico = "";
+  } else {
+    estado.topicoSelecionado = id;
+    estado.topico = id;
+  }
+  estado.offset = 0;
+  atualizarChips();
+  renderTopicosGrid(topicosCache);
+  mudarPainel("noticias");
+  buscar();
+  $("resultados").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function selecionarEntidade(nome) {
+  estado.entidade = nome;
+  estado.offset = 0;
+  sincronizarFiltrosAvancados();
+  atualizarChips();
+  mudarPainel("noticias");
+  buscar();
+}
+
+function removerChip(chave) {
+  if (chave === "palavra") { estado.palavraSelecionada = ""; estado.q = ""; }
+  else if (chave === "topico") { estado.topicoSelecionado = null; estado.topico = ""; renderTopicosGrid(topicosCache); }
+  else if (chave === "categoria") estado.categoria = "";
+  else if (chave === "dominio") estado.dominio = "";
+  else if (chave === "sentimento") estado.sentimento = "";
+  else if (chave === "entidade") estado.entidade = "";
+  else if (chave === "periodo") { estado.de = ""; estado.ate = ""; }
+  estado.offset = 0;
+  atualizarChips();
+  sincronizarFiltrosAvancados();
+  buscar();
+}
+
+function atualizarChips() {
+  const chips = [];
+  if (estado.palavraSelecionada) chips.push({ chave: "palavra", label: `"${estado.palavraSelecionada}"`, cor: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200" });
+  if (estado.topicoSelecionado !== null) {
+    const t = topicosCache.find(x => x.id === estado.topicoSelecionado);
+    chips.push({ chave: "topico", label: t ? t.nome : `Tópico ${estado.topicoSelecionado}`, cor: "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200" });
+  }
+  if (estado.categoria) chips.push({ chave: "categoria", label: estado.categoria, cor: "bg-stone-200 text-stone-800 dark:bg-slate-700 dark:text-slate-200" });
+  if (estado.dominio) chips.push({ chave: "dominio", label: estado.dominio, cor: "bg-stone-200 text-stone-800 dark:bg-slate-700 dark:text-slate-200" });
+  if (estado.sentimento) chips.push({ chave: "sentimento", label: estado.sentimento, cor: "bg-stone-200 text-stone-800 dark:bg-slate-700 dark:text-slate-200" });
+  if (estado.entidade) chips.push({ chave: "entidade", label: estado.entidade, cor: "bg-stone-200 text-stone-800 dark:bg-slate-700 dark:text-slate-200" });
+  if (estado.de || estado.ate) chips.push({ chave: "periodo", label: `${estado.de || "início"} → ${estado.ate || "fim"}`, cor: "bg-stone-200 text-stone-800 dark:bg-slate-700 dark:text-slate-200" });
+
+  $("chips-container").innerHTML = chips.map(c => `
+    <span class="chip-filter ${c.cor}">
+      ${esc(c.label)}
+      <button onclick="removerChip('${c.chave}')" class="hover:opacity-70" aria-label="Remover">×</button>
+    </span>
+  `).join("");
+
+  $("chips-vazio").classList.toggle("hidden", chips.length > 0);
+  $("btn-limpar").classList.toggle("hidden", chips.length === 0);
+}
+
+// ============================================================================
+// PAINÉIS
+// ============================================================================
+
+function mudarPainel(nome) {
+  estado.painel = nome;
+  document.querySelectorAll(".painel").forEach(p => p.classList.add("hidden"));
+  const el = $(`painel-${nome}`);
+  if (el) el.classList.remove("hidden");
+
+  document.querySelectorAll(".panel-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(`.panel-tab[data-painel="${nome}"]`).forEach(t => t.classList.add("active"));
+
+  if (nome === "timeline") carregarTimeline();
+  if (nome === "entidades") carregarEntidades();
+  if (nome === "rede") carregarRede();
+}
+
+// ============================================================================
+// LISTA DE NOTÍCIAS
+// ============================================================================
+
+function ordenarPor(coluna) {
+  if (estado.ordem_coluna === coluna) {
+    estado.ordem_dir = estado.ordem_dir === "asc" ? "desc" : "asc";
+  } else {
+    estado.ordem_coluna = coluna;
+    estado.ordem_dir = "desc";
+  }
+  if (coluna === "data") estado.ordenar = estado.ordem_dir === "asc" ? "data_asc" : "data_desc";
+  else estado.ordenar = "data_desc";
+
+  document.querySelectorAll(".sort-header").forEach(h => {
+    h.classList.toggle("active", h.dataset.sort === coluna);
+    const icon = h.querySelector(".sort-icon");
+    if (icon) icon.textContent = h.dataset.sort === coluna ? (estado.ordem_dir === "asc" ? "▲" : "▼") : "";
+  });
+
+  estado.offset = 0;
+  buscar();
+}
+
+async function buscar() {
+  const params = {
+    q: estado.q, de: estado.de, ate: estado.ate,
+    categoria: estado.categoria, dominio: estado.dominio,
+    sentimento: estado.sentimento, topico: estado.topico,
+    entidade: estado.entidade,
+    so_relevantes: estado.so_relevantes || undefined,
+    ordenar: estado.ordenar,
+    limit: estado.limit, offset: estado.offset,
+  };
+
+  try {
+    const d = await apiGet("/api/noticias?" + qs(params));
+    estado.total = d.total;
+    renderNoticias(d.itens);
+    atualizarInfoNoticias();
+  } catch (e) {
+    $("noticias-lista").innerHTML = `<div class="text-red-600 p-4">Erro: ${e.message}</div>`;
+  }
+}
+
+function renderNoticias(itens) {
+  const lista = $("noticias-lista");
+  const vazio = $("noticias-vazio");
+
+  if (!itens.length) {
+    lista.innerHTML = "";
+    vazio.classList.remove("hidden");
+    return;
+  }
+  vazio.classList.add("hidden");
+
+  lista.innerHTML = itens.map(n => {
+    const isLida = lidas.has(n.id);
+    const nomeTopico = n.topico_nome_v3;
+    const cor = n.topico_id_v3 !== null && n.topico_id_v3 !== undefined ? corTopico(n.topico_id_v3) : null;
+    const per = (n.entidades_per || []).slice(0, 2).map(e =>
+      `<span class="text-xs text-stone-500 dark:text-slate-500">${esc(fixMojibake(e))}</span>`
+    ).join(" · ");
+
+    return `
+      <article class="noticia grid grid-cols-12 gap-3 items-start py-3 hover:bg-stone-50 dark:hover:bg-slate-800/50 transition cursor-pointer -mx-2 px-2 rounded ${isLida ? "noticia-lida" : ""}"
+               data-id="${n.id}" role="button" tabindex="0"
+               onclick="abrirNoticia(${n.id})"
+               onkeydown="if(event.key==='Enter'){abrirNoticia(${n.id})}">
+        <div class="col-span-2 text-xs text-stone-500 dark:text-slate-500 font-medium tabular-nums pt-0.5">${n.data || ""}</div>
+        <div class="col-span-7 min-w-0">
+          ${nomeTopico && cor ? `<div class="mb-1"><span class="text-xs font-medium" style="color: ${cor}">${esc(nomeTopico)}</span></div>` : ""}
+          <h3 class="titulo text-sm font-semibold leading-snug mb-1">${destacar(n.titulo, estado.q)}</h3>
+          ${per ? `<div class="text-xs">${per}</div>` : ""}
+        </div>
+        <div class="col-span-2 text-xs text-stone-500 dark:text-slate-500 truncate pt-0.5">${esc(n.sitename || "")}</div>
+        <div class="col-span-1 flex justify-end">
+          <button onclick="event.stopPropagation(); toggleLida(${n.id})" class="text-sm leading-none transition" title="${isLida ? "Marcar como não lida" : "Marcar como lida"}" style="color: ${isLida ? "#65a30d" : "#cbd5e1"}">
+            ${isLida ? "●" : "○"}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function atualizarInfoNoticias() {
+  const ini = estado.offset + 1;
+  const fim = Math.min(estado.offset + estado.limit, estado.total);
+  $("noticias-info").innerHTML = estado.total
+    ? `<span class="font-medium">${estado.total.toLocaleString("pt-BR")}</span> resultados · mostrando ${ini}–${fim}`
+    : "0 resultados";
+  const pg = Math.floor(estado.offset / estado.limit) + 1;
+  const tp = Math.ceil(estado.total / estado.limit) || 1;
+  $("pagina-info").textContent = `${pg} / ${tp}`;
+  $("btn-prev").disabled = estado.offset === 0;
+  $("btn-next").disabled = estado.offset + estado.limit >= estado.total;
+}
+
+function toggleLida(id) {
+  if (lidas.has(id)) lidas.delete(id); else lidas.add(id);
+  localStorage.setItem("lidas", JSON.stringify([...lidas]));
+  const el = document.querySelector(`.noticia[data-id="${id}"]`);
+  if (el) {
+    el.classList.toggle("noticia-lida");
+    const btn = el.querySelector("button");
+    const isLida = lidas.has(id);
+    btn.style.color = isLida ? "#65a30d" : "#cbd5e1";
+    btn.textContent = isLida ? "●" : "○";
+  }
+  atualizarLidasContador();
+  if (estado.ocultar_lidas) aplicarFiltros();
+}
+
+function marcarTodasLidas() {
+  document.querySelectorAll(".noticia").forEach(el => lidas.add(parseInt(el.dataset.id, 10)));
+  localStorage.setItem("lidas", JSON.stringify([...lidas]));
+  buscar();
+  atualizarLidasContador();
+  toast("Notícias visíveis marcadas como lidas");
+}
+
+function atualizarLidasContador() {
+  $("lidas-contador").textContent = `${lidas.size} lidas`;
+}
+
+// ============================================================================
+// FILTROS
+// ============================================================================
+
+async function popularFiltrosAvancados() {
+  try {
+    const cats = await apiGet("/api/categorias");
+    cats.forEach(c => {
+      const o = document.createElement("option");
+      o.value = c.categoria; o.textContent = `${c.categoria} (${c.total.toLocaleString("pt-BR")})`;
+      $("f-categoria").appendChild(o);
+    });
+  } catch (e) {}
+  try {
+    const doms = await apiGet("/api/dominios?limite=80");
+    doms.forEach(d => {
+      const o = document.createElement("option");
+      o.value = d.domain; o.textContent = `${d.domain} (${d.total})`;
+      $("f-dominio").appendChild(o);
+    });
+  } catch (e) {}
+}
+
+function aplicarFiltrosAvancados() {
+  estado.categoria = $("f-categoria").value;
+  estado.dominio = $("f-dominio").value;
+  estado.sentimento = $("f-sentimento").value;
+  estado.de = $("f-de").value;
+  estado.ate = $("f-ate").value;
+  estado.entidade = $("f-entidade").value.trim();
+  estado.ocultar_lidas = $("ocultar-lidas").checked;
+  estado.offset = 0;
+  atualizarChips();
+  mudarPainel("noticias");
+  buscar();
+}
+
+function limparFiltrosAvancados() {
+  $("f-categoria").value = ""; $("f-dominio").value = ""; $("f-sentimento").value = "";
+  $("f-de").value = ""; $("f-ate").value = ""; $("f-entidade").value = "";
+  aplicarFiltrosAvancados();
+}
+
+function sincronizarFiltrosAvancados() {
+  $("f-categoria").value = estado.categoria;
+  $("f-dominio").value = estado.dominio;
+  $("f-sentimento").value = estado.sentimento;
+  $("f-de").value = estado.de;
+  $("f-ate").value = estado.ate;
+  $("f-entidade").value = estado.entidade;
+}
+
+function aplicarFiltros() {
+  estado.ocultar_lidas = $("ocultar-lidas").checked;
+  estado.offset = 0;
+  buscar();
+}
+
+function limparTudo() {
+  Object.assign(estado, {
+    q: "", palavraSelecionada: "", topicoSelecionado: null, topico: "",
+    categoria: "", dominio: "", sentimento: "", entidade: "", de: "", ate: "", offset: 0,
+  });
+  sincronizarFiltrosAvancados();
+  atualizarChips();
+  renderTopicosGrid(topicosCache);
+  buscar();
+}
+
+function proximaPagina() {
+  if (estado.offset + estado.limit < estado.total) { estado.offset += estado.limit; buscar(); }
+}
+function paginaAnterior() {
+  if (estado.offset > 0) { estado.offset = Math.max(0, estado.offset - estado.limit); buscar(); }
+}
+
+// ============================================================================
+// TIMELINE
+// ============================================================================
+
+let chartTimeline = null;
+async function carregarTimeline() {
+  const dados = await apiGet(`/api/timeline?${qs({
+    de: estado.de || "2019-01-01",
+    ate: estado.ate || "2022-12-31",
+    so_relevantes: estado.so_relevantes || undefined,
+  })}`);
+
+  const isDark = document.documentElement.classList.contains("dark");
+  if (chartTimeline) chartTimeline.destroy();
+  chartTimeline = new Chart($("chart-timeline"), {
+    type: "line",
+    data: {
+      labels: dados.map(d => d.mes),
+      datasets: [{
+        label: "Notícias", data: dados.map(d => d.total),
+        borderColor: "#dc2626", backgroundColor: "rgba(220,38,38,0.08)",
+        fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxRotation: 90, minRotation: 90, font: { size: 9 }, color: isDark ? "#94a3b8" : "#78716c" }, grid: { display: false } },
+        y: { ticks: { color: isDark ? "#94a3b8" : "#78716c" }, grid: { color: isDark ? "#1e293b" : "#f5f5f4" } },
+      },
+    },
+  });
+}
+
+// ============================================================================
+// ENTIDADES
+// ============================================================================
+
+async function carregarEntidades() {
+  const d = await apiGet("/api/entidades?limite=50");
+  const render = (arr, cor) => arr.map((e, i) => `
+    <div class="flex justify-between items-center py-1.5 border-b border-stone-100 dark:border-slate-800 cursor-pointer hover:bg-stone-50 dark:hover:bg-slate-800/50 rounded px-1 -mx-1"
+         onclick="selecionarEntidade('${esc(e.nome).replace(/'/g, "\\'")}')" role="button" tabindex="0"
+         onkeydown="if(event.key==='Enter')selecionarEntidade('${esc(e.nome).replace(/'/g, "\\'")}')">
+      <span class="truncate text-sm"><span class="text-xs text-stone-400 w-6 inline-block tabular-nums">${i+1}</span>${esc(fixMojibake(e.nome))}</span>
+      <span class="text-xs font-medium tabular-nums" style="color: ${cor}">${e.total}</span>
+    </div>
+  `).join("");
+  $("lista-per").innerHTML = render(d.per, "#dc2626");
+  $("lista-org").innerHTML = render(d.org, "#2563eb");
+}
+
+// ============================================================================
+// REDE
+// ============================================================================
+
+async function carregarRede() {
+  const d = await apiGet("/api/rede?limite=30");
+  if (!d.nos.length) return;
+
+  const isDark = document.documentElement.classList.contains("dark");
+  const nodes = d.nos.map(n => ({
+    id: n.id, label: fixMojibake(n.id), value: n.total,
+    color: { background: "#dc2626", border: isDark ? "#0f172a" : "#ffffff" },
+    font: { color: "#ffffff", size: 11, face: "Inter" },
+  }));
+  const edges = d.arestas.map(a => ({
+    from: a.source, to: a.target, value: a.peso,
+    width: Math.min(4, 1 + Math.log(a.peso)),
+    color: { color: isDark ? "#334155" : "#d6d3d1", opacity: 0.5 },
+  }));
+
+  const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+  const opts = {
+    nodes: { shape: "dot", scaling: { min: 10, max: 28 } },
+    physics: { stabilization: { iterations: 200 }, barnesHut: { gravitationalConstant: -7000 } },
+    interaction: { hover: true },
+  };
+  if (window.redeNetwork) window.redeNetwork.destroy();
+  window.redeNetwork = new vis.Network($("grafo-rede"), data, opts);
+  window.redeNetwork.on("click", p => { if (p.nodes.length > 0) selecionarEntidade(p.nodes[0]); });
+}
+
+// ============================================================================
+// MODAL NOTÍCIA
+// ============================================================================
+
+async function abrirNoticia(id) {
+  const n = await apiGet(`/api/noticia/${id}`);
+  const url = new URL(location.href);
+  url.searchParams.set("n", id);
+  history.replaceState(null, "", url.toString());
+
+  $("modal-titulo").textContent = fixMojibake(n.titulo || "(sem título)");
+
+  const nomeTopico = n.topico_nome_v3;
+  const cor = n.topico_id_v3 !== null && n.topico_id_v3 !== undefined ? corTopico(n.topico_id_v3) : null;
+
+  const per = (n.entidades_per || []).map(e => `<span class="text-xs bg-stone-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(" ");
+  const org = (n.entidades_org || []).map(e => `<span class="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded">${esc(fixMojibake(e))}</span>`).join(" ");
+  const pals = (n.palavras_chave || []).slice(0, 12).map(p =>
+    `<button onclick="fecharNoticia(); selecionarPalavra('${esc(p).replace(/'/g, "\\'")}')" class="text-xs bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 text-amber-800 dark:text-amber-200 px-2 py-0.5 rounded transition">${esc(fixMojibake(p))}</button>`
+  ).join(" ");
+
+  const debug = DEBUG ? `
+    <details class="border-t border-stone-200 dark:border-slate-800 pt-3">
+      <summary class="text-xs font-medium text-stone-500 dark:text-slate-500">Debug</summary>
+      <pre class="text-xs bg-stone-50 dark:bg-slate-950 p-2 mt-2 rounded overflow-x-auto">${esc(JSON.stringify(n, null, 2))}</pre>
+    </details>` : "";
+
+  $("modal-corpo").innerHTML = `
+    <div class="flex flex-wrap items-center gap-2 text-xs">
+      <span class="font-medium">${n.data || ""}</span>
+      ${nomeTopico && cor ? `<span class="px-2 py-0.5 rounded font-medium" style="background: ${cor}20; color: ${cor}">${esc(nomeTopico)}</span>` : ""}
+      ${n.sitename ? `<span class="text-stone-500 dark:text-slate-500">${esc(n.sitename)}</span>` : ""}
+      ${n.autor ? `<span class="text-stone-400 dark:text-slate-600">por ${esc(fixMojibake(n.autor))}</span>` : ""}
+    </div>
+
+    ${n.resumo ? `<p class="text-stone-700 dark:text-slate-300 leading-relaxed">${esc(fixMojibake(n.resumo))}</p>` : ""}
+
+    ${pals ? `<div><div class="text-xs font-medium text-stone-500 dark:text-slate-500 mb-1.5">Palavras-chave</div><div class="flex flex-wrap gap-1">${pals}</div></div>` : ""}
+
+    ${per ? `<div class="border-t border-stone-200 dark:border-slate-800 pt-3"><div class="text-xs font-medium text-stone-500 mb-1.5">Pessoas</div><div class="flex flex-wrap gap-1">${per}</div></div>` : ""}
+    ${org ? `<div class="border-t border-stone-200 dark:border-slate-800 pt-3"><div class="text-xs font-medium text-stone-500 mb-1.5">Organizações</div><div class="flex flex-wrap gap-1">${org}</div></div>` : ""}
+
+    <div class="border-t border-stone-200 dark:border-slate-800 pt-3 flex flex-wrap gap-4">
+      <a href="${esc(n.url)}" target="_blank" rel="noopener" class="text-red-700 dark:text-red-400 hover:underline text-sm font-medium">Ler original ↗</a>
+      <button onclick="copiarLink(${n.id})" class="text-sm text-stone-600 dark:text-slate-400 hover:underline">Copiar link</button>
+    </div>
+
+    <div id="relacionadas-container" class="border-t border-stone-200 dark:border-slate-800 pt-3">
+      <div class="text-xs font-medium text-stone-500 mb-2">Relacionadas</div>
+      <div id="relacionadas-lista" class="space-y-1 text-sm text-stone-400">carregando...</div>
+    </div>
+
+    ${debug}
+  `;
+
+  $("modal-noticia").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  if (n.topico_id_v3 !== null && n.topico_id_v3 !== undefined) {
+    try {
+      const rel = await apiGet(`/api/noticias?topico=${n.topico_id_v3}&limit=6&offset=0`);
+      const outras = rel.itens.filter(x => x.id !== n.id).slice(0, 5);
+      const cont = $("relacionadas-lista");
+      if (!outras.length) cont.textContent = "Sem outras notícias neste tópico.";
+      else cont.innerHTML = outras.map(x => `
+        <button onclick="abrirNoticia(${x.id})" class="w-full text-left p-2 rounded hover:bg-stone-50 dark:hover:bg-slate-800/50 text-sm flex justify-between gap-2">
+          <span class="truncate text-stone-700 dark:text-slate-300">${esc(fixMojibake(x.titulo))}</span>
+          <span class="text-xs text-stone-400 shrink-0 tabular-nums">${x.data}</span>
+        </button>
+      `).join("");
+    } catch (e) {
+      $("relacionadas-lista").textContent = "Erro ao carregar.";
+    }
+  } else {
+    $("relacionadas-lista").textContent = "Esta notícia não tem tópico associado.";
+  }
+}
+
+function fecharNoticia() {
+  $("modal-noticia").classList.add("hidden");
+  document.body.style.overflow = "";
+  const url = new URL(location.href);
+  url.searchParams.delete("n");
+  history.replaceState(null, "", url.toString());
+}
+
+function copiarLink(id) {
+  const url = new URL(location.href);
+  url.searchParams.set("n", id);
+  navigator.clipboard.writeText(url.toString()).then(() => toast("Link copiado"));
+}
+
+// ============================================================================
+// BUSCA GLOBAL
+// ============================================================================
+
+let buscaTimer = null;
+$("busca-global").addEventListener("input", e => {
+  clearTimeout(buscaTimer);
+  const q = e.target.value.trim();
+  buscaTimer = setTimeout(() => buscarSugestoes(q, "busca-dropdown"), 200);
+});
+$("busca-global").addEventListener("keydown", e => {
+  if (e.key === "Enter") { const q = e.target.value.trim(); if (q) selecionarPalavra(q); }
+});
+
+async function buscarSugestoes(q, targetId) {
+  const target = $(targetId);
+  if (q.length < 2) { target.innerHTML = ""; target.classList.add("hidden"); return; }
+  target.classList.remove("hidden");
+
+  try {
+    const d = await apiGet(`/api/sugestoes?q=${encodeURIComponent(q)}`);
+    let html = "";
+
+    if (d.topicos && d.topicos.length) {
+      html += `<div class="px-3 py-1.5 text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500">Tópicos</div>`;
+      html += d.topicos.map(t => `<button onclick="selecionarTopico(${t.id}); fecharBusca();" class="w-full text-left px-3 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 text-sm flex justify-between">
+        <span>${esc(t.nome || `Tópico ${t.id}`)}</span><span class="text-xs text-stone-400 tabular-nums">${t.total}</span>
+      </button>`).join("");
+    }
+
+    if (d.entidades.length) {
+      html += `<div class="px-3 py-1.5 text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500">Entidades</div>`;
+      html += d.entidades.map(e => `<button onclick="selecionarEntidade('${esc(e.nome).replace(/'/g, "\\'")}'); fecharBusca();" class="w-full text-left px-3 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 text-sm flex justify-between">
+        <span>${esc(fixMojibake(e.nome))}</span><span class="text-xs text-stone-400 tabular-nums">${e.total}</span>
+      </button>`).join("");
+    }
+
+    if (d.categorias.length) {
+      html += `<div class="px-3 py-1.5 text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500">Categorias</div>`;
+      html += d.categorias.map(c => `<button onclick="estado.categoria='${esc(c.nome)}'; sincronizarFiltrosAvancados(); atualizarChips(); buscar(); fecharBusca(); mudarPainel('noticias');" class="w-full text-left px-3 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 text-sm flex justify-between">
+        <span>${esc(c.nome)}</span><span class="text-xs text-stone-400 tabular-nums">${c.total}</span>
+      </button>`).join("");
+    }
+
+    if (d.total_noticias) {
+      html += `<div class="px-3 py-1.5 text-xs uppercase tracking-wider text-stone-500 dark:text-slate-500">Busca</div>`;
+      html += `<button onclick="selecionarPalavra('${esc(q).replace(/'/g, "\\'")}'); fecharBusca();" class="w-full text-left px-3 py-2 hover:bg-stone-50 dark:hover:bg-slate-800 text-sm">
+        Ver ${d.total_noticias} notícias com "${esc(q)}"
+      </button>`;
+    }
+
+    target.innerHTML = html || `<div class="px-3 py-6 text-stone-400 text-sm text-center">Nada encontrado.</div>`;
+  } catch (e) {
+    target.innerHTML = `<div class="px-3 py-2 text-red-600 text-sm">Erro: ${e.message}</div>`;
+  }
+}
+
+$("busca-modal-input").addEventListener("input", e => {
+  clearTimeout(buscaTimer);
+  const q = e.target.value.trim();
+  buscaTimer = setTimeout(() => buscarSugestoes(q, "busca-modal-resultados"), 200);
+});
+$("busca-modal-input").addEventListener("keydown", e => {
+  if (e.key === "Enter") { const q = e.target.value.trim(); if (q) { selecionarPalavra(q); fecharBusca(); } }
+});
+
+function abrirBusca() {
+  $("modal-busca").classList.remove("hidden");
+  setTimeout(() => $("busca-modal-input").focus(), 50);
+}
+function fecharBusca() {
+  $("modal-busca").classList.add("hidden");
+  $("busca-modal-input").value = "";
+  $("busca-modal-resultados").innerHTML = "";
+}
+
+function abrirAjuda() { $("modal-ajuda").classList.remove("hidden"); }
+function fecharAjuda() { $("modal-ajuda").classList.add("hidden"); }
+
+// ============================================================================
+// PDF
+// ============================================================================
+
+function exportarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  doc.setFontSize(16);
+  doc.text("Corpus Bolsonaro 2019-2022", 40, 50);
+  doc.setFontSize(10);
+  doc.setTextColor(100);
+  doc.text(`Resultados: ${estado.total} notícias`, 40, 70);
+  doc.text(`Gerado: ${new Date().toLocaleString("pt-BR")}`, 40, 84);
+
+  const itens = document.querySelectorAll("#noticias-lista article");
+  let y = 110;
+  itens.forEach(el => {
+    const titulo = el.querySelector("h3")?.textContent || "";
+    const info = el.querySelector(".text-stone-500, .dark\\:text-slate-500")?.textContent || "";
+    if (y > 780) { doc.addPage(); y = 50; }
+    doc.setTextColor(30);
+    doc.setFontSize(9);
+    doc.text(info, 40, y);
+    y += 12;
+    doc.setFontSize(10);
+    const linhas = doc.splitTextToSize(fixMojibake(titulo), 515);
+    doc.text(linhas, 40, y);
+    y += linhas.length * 12 + 8;
+  });
+  doc.save(`bolsonaro-${Date.now()}.pdf`);
+  toast("PDF gerado");
+}
+
+// ============================================================================
+// ATALHOS
+// ============================================================================
+
+document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+    e.preventDefault(); abrirBusca();
+  }
+  if (e.key === "Escape") {
+    if (!$("modal-busca").classList.contains("hidden")) fecharBusca();
+    else if (!$("modal-noticia").classList.contains("hidden")) fecharNoticia();
+    else if (!$("modal-ajuda").classList.contains("hidden")) fecharAjuda();
+    else $("busca-dropdown").classList.add("hidden");
+  }
+});
+
+document.addEventListener("click", e => {
+  if (!e.target.closest("#busca-global") && !e.target.closest("#busca-dropdown")) {
+    $("busca-dropdown").classList.add("hidden");
+  }
+});
+
+// ============================================================================
+// INIT
+// ============================================================================
+
+init();
+
+const nId = new URLSearchParams(location.search).get("n");
+if (nId) setTimeout(() => abrirNoticia(parseInt(nId)), 600);
+</script>
+</body>
+</html>

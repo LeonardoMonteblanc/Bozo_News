@@ -1,0 +1,38 @@
+{
+  "versao": "t202-resplit",
+  "subtopicos": {
+    "300": {
+      "nome_provisorio": "Reforma Câmara",
+      "total": 1676,
+      "palavras": [
+        "reforma",
+        "câmara",
+        "feira",
+        "não",
+        "pelo",
+        "congresso",
+        "jair",
+        "senado",
+        "previdência",
+        "economia"
+      ]
+    },
+    "301": {
+      "nome_provisorio": "Pandemia Coronavírus",
+      "total": 2005,
+      "palavras": [
+        "pandemia",
+        "coronavírus",
+        "covid",
+        "19",
+        "covid 19",
+        "2020",
+        "saúde",
+        "publicado",
+        "portal",
+        "holanda"
+      ]
+    }
+  },
+  "gerado_em": "2026-10-11T04:41:32.876789"
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Validação humana de tópicos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: system-ui, sans-serif; }
+  .btn-julgamento { transition: all 0.15s; }
+  .btn-julgamento.ativo { font-weight: 700; box-shadow: 0 0 0 3px currentColor; }
+</style>
+</head>
+<body class="bg-slate-50 p-6">
+
+<div class="max-w-4xl mx-auto">
+  <header class="mb-6">
+    <h1 class="text-2xl font-bold">Validação humana de tópicos</h1>
+    <p class="text-sm text-slate-600" id="subtitulo">Carregando...</p>
+  </header>
+
+  <div class="mb-4">
+    <div class="bg-slate-200 rounded-full h-2 overflow-hidden">
+      <div id="progresso-bar" class="bg-red-600 h-full transition-all" style="width: 0%"></div>
+    </div>
+    <div class="text-xs text-slate-500 mt-1" id="progresso-txt">0 / 0</div>
+  </div>
+
+  <div id="topico-atual" class="bg-white rounded-lg shadow p-6"></div>
+
+  <div class="mt-6 flex justify-between">
+    <button onclick="anterior()" class="px-4 py-2 bg-slate-200 rounded hover:bg-slate-300">← anterior</button>
+    <button onclick="proximo()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">próximo →</button>
+  </div>
+
+  <button onclick="exportar()" class="fixed bottom-6 right-6 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700">
+    💾 Exportar julgamentos
+  </button>
+</div>
+
+<script>
+let dados = {};
+let julgamentos = JSON.parse(localStorage.getItem("julgamentos") || "{}");
+let idx = 0;
+let lista = [];
+
+async function init() {
+  try {
+    const r = await fetch("_validacao_llm.json");
+    dados = await r.json();
+    lista = Object.values(dados).sort((a, b) => b.total - a.total);
+    document.getElementById("subtitulo").textContent =
+      `${lista.length} tópicos para revisar`;
+    atualizarProgresso();
+    render();
+  } catch (e) {
+    document.getElementById("subtitulo").textContent = "erro ao carregar _validacao_llm.json";
+  }
+}
+
+function atualizarProgresso() {
+  const total = lista.length;
+  const feitos = lista.filter(t => julgamentos[t.id]).length;
+  document.getElementById("progresso-bar").style.width = `${(feitos/total)*100}%`;
+  document.getElementById("progresso-txt").textContent = `${feitos} / ${total}`;
+}
+
+function render() {
+  if (!lista.length) return;
+  const t = lista[idx];
+  const j = julgamentos[t.id] || {};
+
+  const html = `
+    <div class="mb-4">
+      <div class="text-xs text-slate-500 uppercase tracking-wide">${idx+1} de ${lista.length}</div>
+      <h2 class="text-xl font-bold mt-1">${t.nome}</h2>
+      <div class="text-sm text-slate-600">${t.total.toLocaleString("pt-BR")} notícias no total</div>
+    </div>
+
+    <div class="mb-4">
+      <div class="text-sm font-medium mb-2">Avaliação geral:</div>
+      <div class="flex gap-2 flex-wrap">
+        <button class="btn-julgamento ${j.julgamento === 'correto' ? 'ativo' : ''} px-4 py-2 bg-emerald-100 text-emerald-800 rounded"
+                onclick="julgar(${t.id}, 'correto')">✓ Tópico correto</button>
+        <button class="btn-julgamento ${j.julgamento === 'parcial' ? 'ativo' : ''} px-4 py-2 bg-amber-100 text-amber-800 rounded"
+                onclick="julgar(${t.id}, 'parcial')">~ Parcialmente correto</button>
+        <button class="btn-julgamento ${j.julgamento === 'errado' ? 'ativo' : ''} px-4 py-2 bg-red-100 text-red-800 rounded"
+                onclick="julgar(${t.id}, 'errado')">✗ Tópico errado</button>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <div class="text-sm font-medium mb-2">Sugestão de nome alternativo (opcional):</div>
+      <input type="text" class="w-full border rounded p-2 text-sm"
+             placeholder="ex: Saúde pública e pandemia"
+             value="${j.nome_alternativo || ''}"
+             onchange="anotar(${t.id}, 'nome_alternativo', this.value)">
+    </div>
+
+    <div class="mb-4">
+      <div class="text-sm font-medium mb-2">Notas (opcional):</div>
+      <textarea class="w-full border rounded p-2 text-sm" rows="2"
+                placeholder="Observações sobre o tópico..."
+                onchange="anotar(${t.id}, 'nota', this.value)">${j.nota || ''}</textarea>
+    </div>
+
+    <details class="border-t pt-4">
+      <summary class="text-sm font-medium cursor-pointer text-slate-600">
+        Ver ${t.amostras?.length || 0} amostras de notícias
+      </summary>
+      <div class="mt-3 space-y-2 max-h-96 overflow-y-auto">
+        ${(t.amostras || []).map(a => `
+          <div class="border-l-2 border-slate-300 pl-3 py-1">
+            <div class="text-xs text-slate-500">${a.data}</div>
+            <div class="text-sm">${a.titulo}</div>
+          </div>
+        `).join("")}
+      </div>
+    </details>
+  `;
+
+  document.getElementById("topico-atual").innerHTML = html;
+}
+
+function julgar(id, valor) {
+  julgamentos[id] = julgamentos[id] || {};
+  julgamentos[id].julgamento = valor;
+  julgamentos[id].revisado_em = new Date().toISOString();
+  localStorage.setItem("julgamentos", JSON.stringify(julgamentos));
+  atualizarProgresso();
+  render();
+}
+
+function anotar(id, campo, valor) {
+  julgamentos[id] = julgamentos[id] || {};
+  julgamentos[id][campo] = valor;
+  localStorage.setItem("julgamentos", JSON.stringify(julgamentos));
+}
+
+function proximo() { if (idx < lista.length - 1) { idx++; render(); } }
+function anterior() { if (idx > 0) { idx--; render(); } }
+
+function exportar() {
+  const blob = new Blob([JSON.stringify(julgamentos, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "_validacao_humana.json";
+  a.click();
+}
+
+init();
+</script>
+</body>
+</html>

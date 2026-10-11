@@ -1,0 +1,251 @@
+{
+  "versao": "bertopic-v2-consolidado-llm-7b",
+  "modelo_llm": "qwen2.5:7b",
+  "n_topicos": 12,
+  "topicos": {
+    "100": {
+      "id": 100,
+      "nome": "Pandemia e vacinação",
+      "total": 7435,
+      "palavras_bertopic": [
+        "vacinação",
+        "covid",
+        "vacina",
+        "19",
+        "covid 19",
+        "saúde",
+        "anos",
+        "votuporanga",
+        "vacinas",
+        "feira",
+        "pandemia",
+        "os"
+      ],
+      "topicos_originais": [
+        0,
+        2
+      ]
+    },
+    "11": {
+      "id": 11,
+      "nome": "STF e Flávio Bolsonaro",
+      "total": 653,
+      "palavras_bertopic": [
+        "stf",
+        "bolsonaro",
+        "flávio",
+        "tribunal",
+        "supremo",
+        "flávio bolsonaro",
+        "inquérito",
+        "supremo tribunal",
+        "justiça",
+        "polícia"
+      ],
+      "topicos_originais": [
+        11
+      ]
+    },
+    "13": {
+      "id": 13,
+      "nome": "Lula e o PT",
+      "total": 547,
+      "palavras_bertopic": [
+        "lula",
+        "pt",
+        "inácio",
+        "inácio lula",
+        "lula silva",
+        "luiz inácio",
+        "silva",
+        "luiz",
+        "mg",
+        "juiz fora"
+      ],
+      "topicos_originais": [
+        13
+      ]
+    },
+    "9": {
+      "id": 9,
+      "nome": "Bolsonaro e Palácio do Alvorada",
+      "total": 438,
+      "palavras_bertopic": [
+        "bolsonaro",
+        "jair bolsonaro",
+        "jair",
+        "feira",
+        "alvorada",
+        "palácio",
+        "nesta",
+        "brasília",
+        "palácio alvorada",
+        "não"
+      ],
+      "topicos_originais": [
+        9
+      ]
+    },
+    "1": {
+      "id": 1,
+      "nome": "Combustíveis e Petrobras",
+      "total": 425,
+      "palavras_bertopic": [
+        "petrobras",
+        "preço",
+        "gasolina",
+        "combustíveis",
+        "preços",
+        "gás",
+        "óleo",
+        "icms",
+        "venda",
+        "combustível"
+      ],
+      "topicos_originais": [
+        1
+      ]
+    },
+    "5": {
+      "id": 5,
+      "nome": "Manifestações políticas",
+      "total": 310,
+      "palavras_bertopic": [
+        "manifestantes",
+        "bolsonaro",
+        "manifestações",
+        "ato",
+        "atos",
+        "manifestação",
+        "bolsonaristas",
+        "protestos",
+        "paulo",
+        "brasília"
+      ],
+      "topicos_originais": [
+        5
+      ]
+    },
+    "4": {
+      "id": 4,
+      "nome": "Fake news e redes sociais",
+      "total": 201,
+      "palavras_bertopic": [
+        "fake",
+        "fake news",
+        "news",
+        "whatsapp",
+        "falsas",
+        "as",
+        "sobre",
+        "sociais",
+        "redes",
+        "os"
+      ],
+      "topicos_originais": [
+        4
+      ]
+    },
+    "7": {
+      "id": 7,
+      "nome": "Sergio Moro e Justiça",
+      "total": 196,
+      "palavras_bertopic": [
+        "moro",
+        "sergio moro",
+        "sergio",
+        "ex",
+        "justiça",
+        "sérgio moro",
+        "sérgio",
+        "pf",
+        "justiça segurança",
+        "bolsonaro"
+      ],
+      "topicos_originais": [
+        7
+      ]
+    },
+    "3": {
+      "id": 3,
+      "nome": "Saúde e hospitais",
+      "total": 183,
+      "palavras_bertopic": [
+        "hospital",
+        "cirurgia",
+        "bolsonaro",
+        "jair",
+        "jair bolsonaro",
+        "boletim",
+        "internado",
+        "médico",
+        "alta",
+        "feira"
+      ],
+      "topicos_originais": [
+        3
+      ]
+    },
+    "12": {
+      "id": 12,
+      "nome": "Eleições estaduais SP",
+      "total": 160,
+      "palavras_bertopic": [
+        "tarcísio",
+        "turno",
+        "governador",
+        "haddad",
+        "paulo",
+        "candidato",
+        "ex",
+        "psdb",
+        "sp",
+        "tarcísio freitas"
+      ],
+      "topicos_originais": [
+        12
+      ]
+    },
+    "10": {
+      "id": 10,
+      "nome": "Polícia Federal e operações",
+      "total": 130,
+      "palavras_bertopic": [
+        "polícia",
+        "pf",
+        "operação",
+        "lavagem dinheiro",
+        "lavagem",
+        "dinheiro",
+        "criminosa",
+        "mandados",
+        "organização criminosa",
+        "organização"
+      ],
+      "topicos_originais": [
+        10
+      ]
+    },
+    "8": {
+      "id": 8,
+      "nome": "América Latina e Venezuela",
+      "total": 100,
+      "palavras_bertopic": [
+        "venezuela",
+        "maduro",
+        "argentina",
+        "bolsonaro",
+        "países",
+        "eua",
+        "os",
+        "mourão",
+        "fronteira",
+        "trump"
+      ],
+      "topicos_originais": [
+        8
+      ]
+    }
+  },
+  "gerado_em": "2026-10-11T03:05:35.206812"
+}

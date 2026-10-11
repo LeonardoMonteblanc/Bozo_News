@@ -48,31 +48,13 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 
 # ========================= CONFIG =========================
-
-DB_FILE     = "corpus.db"
-DADOS_DIR   = os.path.join("cc_news_pt_dados", "data")
-SHARDS_DIR  = os.path.join("cc_news_pt", "_shards")
-LOG_FILE    = "pipeline.log"
-CKPT_DIR    = ".pipeline_ckpt"
-
-# Recursos
-N_WORKERS_TEXTO = 4      # para fases 1 e 2 (CPU-bound, sem ML)
-N_WORKERS_BERT  = 2      # para fases 3 e 4 (ML, memória)
-TORCH_THREADS_PER_WORKER = 2
-
-# Batch sizes
-BATCH_TEXTO = 500
-BATCH_BERT  = 16
-BATCH_DB    = 500
-
-# Modelos
-MODEL_SENTIMENTO = "pysentimiento/bertweet-pt-sentiment"
-MODEL_NER        = "lfcc/bert-portuguese-ner"
-MODEL_EMBEDDINGS = "paraphrase-multilingual-MiniLM-L12-v2"
-
-# BERTopic
-N_TOPICOS_MIN = 20
-N_TOPICOS_MAX = 40
+from src.pipeline.config import (
+    DB_FILE, DADOS_DIR, SHARDS_DIR, LOG_FILE, CKPT_DIR,
+    N_WORKERS_TEXTO, N_WORKERS_BERT, TORCH_THREADS_PER_WORKER,
+    BATCH_TEXTO, BATCH_BERT, BATCH_DB,
+    MODEL_SENTIMENTO, MODEL_NER, MODEL_EMBEDDINGS,
+    N_TOPICOS_MIN, N_TOPICOS_MAX,
+)
 
 # Bolsonaro
 PER_BOLSONARO = {

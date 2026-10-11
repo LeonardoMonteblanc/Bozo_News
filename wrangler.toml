@@ -1,8 +1,0 @@
-name = "bolsonaro-corpus-api"
-main = "worker/src/index.js"
-compatibility_date = "2025-01-01"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "bolsonaro-corpus"
-database_id = "33c41333-ef24-47e3-9b5f-7787a654e841"

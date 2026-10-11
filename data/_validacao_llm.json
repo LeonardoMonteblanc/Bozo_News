@@ -1,0 +1,1958 @@
+{
+  "100": {
+    "id": 100,
+    "nome": "Pandemia e vacinação",
+    "total": 7435,
+    "amostras": [
+      {
+        "id": 101399,
+        "data": "2019-01-02",
+        "titulo": "Ministério da Agricultura passa a demarcar terra indígena"
+      },
+      {
+        "id": 101416,
+        "data": "2019-01-02",
+        "titulo": "Ministro da Cidadania minimiza extinção de pasta da Cultura"
+      },
+      {
+        "id": 101437,
+        "data": "2019-01-02",
+        "titulo": "Austrália constrói o primeiro colégio residencial indígena do país"
+      },
+      {
+        "id": 101451,
+        "data": "2019-01-02",
+        "titulo": "Ministro da Educação diz que ensino básico será prioridade da pasta"
+      },
+      {
+        "id": 101455,
+        "data": "2019-01-02",
+        "titulo": "Ministro da Cidadania diz que 13.º do Bolsa Família custará R$ 2,5 bi"
+      },
+      {
+        "id": 101526,
+        "data": "2019-01-04",
+        "titulo": "Bolsonaro prorroga incentivo fiscal para empresas do Norte e Nordeste"
+      },
+      {
+        "id": 101530,
+        "data": "2019-01-04",
+        "titulo": "Secretário especial da Receita diz que não haverá aumento do IOF"
+      },
+      {
+        "id": 101553,
+        "data": "2019-01-05",
+        "titulo": "Maia antecipa pagamento de R$ 17 mi de auxílio-mudança a deputados"
+      },
+      {
+        "id": 101655,
+        "data": "2019-01-07",
+        "titulo": "Bolsonaro sanciona fundos para cultura e educação"
+      },
+      {
+        "id": 101669,
+        "data": "2019-01-07",
+        "titulo": "Bolsonaro cobra transparência em atos passados de bancos públicos"
+      },
+      {
+        "id": 53430,
+        "data": "2020-06-03",
+        "titulo": "Pandemia aumenta violência de gênero e adia pautas feministas na América Latina"
+      },
+      {
+        "id": 53453,
+        "data": "2020-06-03",
+        "titulo": "OMS anuncia que vai retomar testes com hidroxicloroquina para Covid-19"
+      },
+      {
+        "id": 53473,
+        "data": "2020-06-04",
+        "titulo": "Holanda rejeita acordo Mercosul-UE"
+      },
+      {
+        "id": 53477,
+        "data": "2020-06-04",
+        "titulo": "Governo deve estender auxílio emergencial em mais duas parcelas de R$ 300"
+      },
+      {
+        "id": 53499,
+        "data": "2020-06-04",
+        "titulo": "Secretaria Municipal de Saúde Disponibiliza Atendimento Psicológico No Período de Pandemia do Novo Coronavírus. - ECOACRE.NET"
+      },
+      {
+        "id": 53516,
+        "data": "2020-06-04",
+        "titulo": "Senado aprova atendimento a vítima de violência doméstica como essencial"
+      },
+      {
+        "id": 53569,
+        "data": "2020-06-04",
+        "titulo": "Pandemia aumenta onda de desemprego e falência de empresas em Guarapari"
+      },
+      {
+        "id": 53573,
+        "data": "2020-06-04",
+        "titulo": "Nos EUA, estudante de Vargem conta como foi o enfrentamento da pandemia lá"
+      },
+      {
+        "id": 53597,
+        "data": "2020-06-04",
+        "titulo": "'As Aventuras de Poliana' chega ao fim no dia 6 de julho e é substituída por 'Chiquititas'"
+      },
+      {
+        "id": 53614,
+        "data": "2020-06-04",
+        "titulo": "Herinque Fogaça fecha restaurante no Rio por causa da pandemia do novo coronavírus"
+      },
+      {
+        "id": 30648,
+        "data": "2021-02-27",
+        "titulo": "Com o agravamento da pandemia, Quitandinha edita novo decreto com novas medidas restritivas para conter a pandemia"
+      },
+      {
+        "id": 32341,
+        "data": "2021-02-27",
+        "titulo": "Governo federal inclui trabalhadores da educação no grupo prioritário de vacinação - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 20896,
+        "data": "2021-02-28",
+        "titulo": "MEC tem 8,9 mil obras abandonadas pelo país e pode perder R$ 1,1 bilhão"
+      },
+      {
+        "id": 20911,
+        "data": "2021-02-28",
+        "titulo": "Vacinação no Ginásio de Esportes continua nesta segunda-feira para idosos de 84 anos"
+      },
+      {
+        "id": 30516,
+        "data": "2021-03-01",
+        "titulo": "Mais grave é a pandemia da inconsciência"
+      },
+      {
+        "id": 30530,
+        "data": "2021-03-01",
+        "titulo": "Surpresa e gratidão marcam dia de vacinação de idosos"
+      },
+      {
+        "id": 30585,
+        "data": "2021-03-01",
+        "titulo": "Com pandemia, varejo elimina 75,2 mil lojas"
+      },
+      {
+        "id": 30588,
+        "data": "2021-03-01",
+        "titulo": "‘Somar forças para tirar entulho da sala’, diz Huck, ao lado de Marina e Manuela"
+      },
+      {
+        "id": 30590,
+        "data": "2021-03-01",
+        "titulo": "Bolsonaro abre novo conflito com governadores"
+      },
+      {
+        "id": 30598,
+        "data": "2021-03-01",
+        "titulo": "Primeira parcela do novo auxílio será paga neste mês, diz Arthur Lira"
+      }
+    ],
+    "score_llm": 5,
+    "score_max": 30,
+    "veredito": "manter",
+    "relatorio_validador": "SCORE: 5\nFORA: 14, 18, 28\nAVALIACAO: Notícias focadas na pandemia e vacinação são predominantes, mas algumas são periféricas.",
+    "relatorio_auditor": "VEREDITO: manter\nJUSTIFICATIVA: SCORE de 5 indica que as avaliações são predominantes, justificando a manutenção do tópico.",
+    "flaggado": true
+  },
+  "11": {
+    "id": 11,
+    "nome": "STF e Flávio Bolsonaro",
+    "total": 653,
+    "amostras": [
+      {
+        "id": 101688,
+        "data": "2019-01-08",
+        "titulo": "MP do Rio deve ouvir nesta terça-feira mulher e filhas de Queiroz"
+      },
+      {
+        "id": 101907,
+        "data": "2019-01-08",
+        "titulo": "Familiares de Queiroz não comparecem a depoimento -"
+      },
+      {
+        "id": 101712,
+        "data": "2019-01-09",
+        "titulo": "Estou sendo tratado como 'o pior bandido do mundo', diz Queiroz"
+      },
+      {
+        "id": 102698,
+        "data": "2019-01-11",
+        "titulo": "Flávio Bolsonaro não depõe sobre caso de ex-motorista -"
+      },
+      {
+        "id": 102972,
+        "data": "2019-01-12",
+        "titulo": "Após dois anos, PGR silencia sobre indícios contra Maia -"
+      },
+      {
+        "id": 103032,
+        "data": "2019-01-12",
+        "titulo": "Toffoli deixa para Barroso decisão sobre inquérito dos Portos"
+      },
+      {
+        "id": 103091,
+        "data": "2019-01-13",
+        "titulo": "Alvo de atentado, deputada Martha Rocha relata ameaça de milicianos -"
+      },
+      {
+        "id": 103212,
+        "data": "2019-01-14",
+        "titulo": "Pode haver denúncia mesmo sem depoimentos, diz procurador-geral do Rio sobre caso Queiroz -"
+      },
+      {
+        "id": 103688,
+        "data": "2019-01-16",
+        "titulo": "STF abre 19 inquéritos sobre esquema investigado na Operação Carne Fraca -"
+      },
+      {
+        "id": 103784,
+        "data": "2019-01-17",
+        "titulo": "Ministério Público do Rio usa Coaf como atalho para burlar Justiça, diz Flávio Bolsonaro -"
+      },
+      {
+        "id": 65238,
+        "data": "2020-05-13",
+        "titulo": "Lewandowski deve decidir hoje se divulga exames de Bolsonaro"
+      },
+      {
+        "id": 65250,
+        "data": "2020-05-13",
+        "titulo": "Em depoimento, deputada Carla Zambelli nega aval de Bolsonaro para propor STF a Moro"
+      },
+      {
+        "id": 65313,
+        "data": "2020-05-14",
+        "titulo": "Inquérito sobre corrupção e lavagem de dinheiro que envolve Aécio Neves fica na Justiça estadual"
+      },
+      {
+        "id": 65324,
+        "data": "2020-05-14",
+        "titulo": "Investigação sobre gestão do Cruzeiro avançou em alguns pontos, diz MP"
+      },
+      {
+        "id": 65455,
+        "data": "2020-05-14",
+        "titulo": "Em reunião, Bolsonaro reclamou da PF, citou proteção à família e disse: 'Vou interferir'"
+      },
+      {
+        "id": 65456,
+        "data": "2020-05-14",
+        "titulo": "Relatório da PF sobre facada em Bolsonaro diz que apuração não pode se basear em opinião pública ou leigos"
+      },
+      {
+        "id": 65508,
+        "data": "2020-05-15",
+        "titulo": "Assim como governo Bolsonaro, Aras defende no STF divulgação de apenas parte de vídeo"
+      },
+      {
+        "id": 65543,
+        "data": "2020-05-15",
+        "titulo": "Bolsonaro diz que 'interferência' era na segurança, mas transcrição trata da área de inteligência"
+      },
+      {
+        "id": 65618,
+        "data": "2020-05-15",
+        "titulo": "Em 2º inquérito, PF conclui que Adélio agiu sozinho em ataque a Bolsonaro"
+      },
+      {
+        "id": 65714,
+        "data": "2020-05-15",
+        "titulo": "Operação policial deixa ao menos 10 mortos no Complexo do Alemão, no Rio"
+      },
+      {
+        "id": 17971,
+        "data": "2021-02-17",
+        "titulo": "Ministros do STF acreditam em maioria no plenário por prisão"
+      },
+      {
+        "id": 18090,
+        "data": "2021-02-18",
+        "titulo": "Ministros querem acelerar processo de Silveira e apostam em perda de mandato via Supremo ou Câmara"
+      },
+      {
+        "id": 18265,
+        "data": "2021-02-18",
+        "titulo": "Audiência de custódia decide prisão de Daniel Silveira nesta quinta"
+      },
+      {
+        "id": 18402,
+        "data": "2021-02-19",
+        "titulo": "PGR pede inquérito contra Silveira por desacato a policial civil do IML do Rio"
+      },
+      {
+        "id": 18417,
+        "data": "2021-02-19",
+        "titulo": "STF julga decreto de Bolsonaro que esvazia conselho da Criança e do Adolescente"
+      },
+      {
+        "id": 18508,
+        "data": "2021-02-19",
+        "titulo": "Deputado do PSDB será relator da prisão de Daniel Silveira na Câmara"
+      },
+      {
+        "id": 18693,
+        "data": "2021-02-21",
+        "titulo": "Prisão de Silveira é rara unanimidade no STF"
+      },
+      {
+        "id": 19660,
+        "data": "2021-02-22",
+        "titulo": "STJ analisa pedidos para anular investigação da rachadinha"
+      },
+      {
+        "id": 20288,
+        "data": "2021-02-25",
+        "titulo": "Elo de Bolsonaros com Wassef seguiu após prisão de Queiroz"
+      },
+      {
+        "id": 20476,
+        "data": "2021-02-25",
+        "titulo": "STF mantém arquivamento de inquérito contra JV e Tião Viana - OEstadoAcre.com"
+      }
+    ],
+    "score_llm": 10,
+    "score_max": 30,
+    "veredito": "manter",
+    "relatorio_validador": "SCORE: 10\nFORA: 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30\nAVALIACAO: Notícias focadas no STF e Flávio Bolsonaro são limitadas, mas existem.",
+    "relatorio_auditor": "VEREDITO: manter\nJUSTIFICATIVA: Score alto e notícias existentes justificam manutenção.",
+    "flaggado": true
+  },
+  "13": {
+    "id": 13,
+    "nome": "Lula e o PT",
+    "total": 547,
+    "amostras": [
+      {
+        "id": 109292,
+        "data": "2019-01-29",
+        "titulo": "Vavá, irmão de Lula, morre em SP e ex-presidente pede para ir ao enterro -"
+      },
+      {
+        "id": 110057,
+        "data": "2019-02-01",
+        "titulo": "Lula orienta PT a explorar caso Queiroz e Brumadinho contra Bolsonaro -"
+      },
+      {
+        "id": 123283,
+        "data": "2019-02-21",
+        "titulo": "Meningite: morre o neto de sete anos do ex-presidente Lula - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 121367,
+        "data": "2019-04-23",
+        "titulo": "Recurso de Lula, Previdência e Mourão pautam redes sociais"
+      },
+      {
+        "id": 136839,
+        "data": "2019-05-11",
+        "titulo": "BBC entrevista Lula: \"Se tivessem provas eles me desmascaravam' (v) - OEstadoAcre.com bbc"
+      },
+      {
+        "id": 138331,
+        "data": "2019-05-20",
+        "titulo": "Saiba quem é a nova namorada do ex-presidente Lula"
+      },
+      {
+        "id": 130377,
+        "data": "2019-06-14",
+        "titulo": "Ministro dispara após fala de Lula: 'Tinha que tomar prisão perpétua'"
+      },
+      {
+        "id": 170523,
+        "data": "2019-10-04",
+        "titulo": "empresário"
+      },
+      {
+        "id": 2214,
+        "data": "2019-10-26",
+        "titulo": "Possível soltura de Lula já é discutida entre dirigentes de partidos"
+      },
+      {
+        "id": 2758,
+        "data": "2019-10-28",
+        "titulo": "Bolsonaro diz que apoiar a liberdade de Lula é “uma afronta à democracia brasileira e ao sistema judiciário”"
+      },
+      {
+        "id": 93707,
+        "data": "2022-10-01",
+        "titulo": "Saiba por que os sertanejos estão mais calados agora do que em eleições anteriores - Juiz de Fora/MG"
+      },
+      {
+        "id": 93709,
+        "data": "2022-10-01",
+        "titulo": "Ana Carolina declara voto em Lula e diz ter pressa de mudar - Juiz de Fora/MG"
+      },
+      {
+        "id": 93794,
+        "data": "2022-10-01",
+        "titulo": "Entenda a relação de Caetano Veloso com Ciro Gomes, que o alfinetou no debate na TV - Juiz de Fora/MG"
+      },
+      {
+        "id": 93799,
+        "data": "2022-10-01",
+        "titulo": "Lula faz caminhada na rua Augusta, em SP, em último ato da campanha no 1º turno - Juiz de Fora/MG"
+      },
+      {
+        "id": 93811,
+        "data": "2022-10-01",
+        "titulo": "De Fátima Bernardes a Xuxa, veja quem declarou voto na reta final da eleição - Juiz de Fora/MG"
+      },
+      {
+        "id": 93812,
+        "data": "2022-10-01",
+        "titulo": "Bolsonaro e Lula surgem em clipe de funkeiros com mensagem isentona - Juiz de Fora/MG"
+      },
+      {
+        "id": 93911,
+        "data": "2022-10-01",
+        "titulo": "Empresário é pragmático e tem resistência zero a Lula, diz anfitrião após jantar com petista - Juiz de Fora/MG"
+      },
+      {
+        "id": 93918,
+        "data": "2022-10-01",
+        "titulo": "Campanha de Lula espera voto útil na hora H e aliados de Bolsonaro apostam em abstenção - Juiz de Fora/MG"
+      },
+      {
+        "id": 93871,
+        "data": "2022-10-02",
+        "titulo": "Alanis Guillen, a Juma de 'Pantanal', declara apoio a Lula - Juiz de Fora/MG"
+      },
+      {
+        "id": 93881,
+        "data": "2022-10-02",
+        "titulo": "Lula abarca ex-algozes para chegar forte ao 1º turno e mira nova ofensiva por alianças - Juiz de Fora/MG"
+      },
+      {
+        "id": 106498,
+        "data": "2022-10-31",
+        "titulo": "Lula diz que ter medo de cultura é temer liberdade e promete retomar ministério - Juiz de Fora/MG"
+      },
+      {
+        "id": 106499,
+        "data": "2022-10-31",
+        "titulo": "Lula tem espaço para criar 'geringonça' brasileira, diz Elena Landau - Juiz de Fora/MG"
+      },
+      {
+        "id": 106501,
+        "data": "2022-10-31",
+        "titulo": "Discurso de Lula fortalece coalizão e 'aponta para o futuro', dizem economistas - Juiz de Fora/MG"
+      },
+      {
+        "id": 106502,
+        "data": "2022-10-31",
+        "titulo": "Corinthians parabeniza Lula por vitória nas eleições - Juiz de Fora/MG"
+      },
+      {
+        "id": 106504,
+        "data": "2022-10-31",
+        "titulo": "Ditador da Nicarágua celebra vitória de Lula - Juiz de Fora/MG"
+      },
+      {
+        "id": 106507,
+        "data": "2022-10-31",
+        "titulo": "Rui Costa diz que Lula não fará governo do PT, mas de reconstrução nacional - Juiz de Fora/MG"
+      },
+      {
+        "id": 106508,
+        "data": "2022-10-31",
+        "titulo": "À espera de Lula, multidão na Avenida Paulista homenageia Nordeste e ataca Neymar - Juiz de Fora/MG"
+      },
+      {
+        "id": 106512,
+        "data": "2022-10-31",
+        "titulo": "Lula terá que buscar até o centrão para ter maioria no Congresso - Juiz de Fora/MG"
+      },
+      {
+        "id": 106514,
+        "data": "2022-10-31",
+        "titulo": "Em primeiro discurso, Lula diz que combate à miséria é sua missão - Juiz de Fora/MG"
+      },
+      {
+        "id": 106515,
+        "data": "2022-10-31",
+        "titulo": "Lula discursa a milhares na Paulista e diz esperar sinal de Bolsonaro para transição - Juiz de Fora/MG"
+      }
+    ],
+    "score_llm": 22,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 22\nFORA: 11, 25, 27\nAVALIACAO: A maioria das notícias foca em Lula e o PT, mas algumas são mais gerais ou periféricas.\n\nExplicação dos critérios de exclusão:\n11 - Sobre sertanejos e não relacionado diretamente a Lula ou o PT.\n25 - Comentário de ditador sobre Lula, mas não aborda diretamente o tópico.\n27 - Multidão na Avenida Paulista, mas não foca em Lula ou o PT.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: A maioria das notícias foca em Lula e o PT, mas há algumas que são mais gerais ou periféricas.",
+    "flaggado": true
+  },
+  "9": {
+    "id": 9,
+    "nome": "Bolsonaro e Palácio do Alvorada",
+    "total": 438,
+    "amostras": [
+      {
+        "id": 101366,
+        "data": "2019-01-01",
+        "titulo": "Bolsonaro chega ao Palácio do Planalto e recebe faixa presidencial"
+      },
+      {
+        "id": 101368,
+        "data": "2019-01-01",
+        "titulo": "Após tomar posse, Bolsonaro é homenageado com tiros de canhão"
+      },
+      {
+        "id": 101374,
+        "data": "2019-01-01",
+        "titulo": "Jair Bolsonaro deixa Catedral rumo ao Congresso de carro aberto"
+      },
+      {
+        "id": 101383,
+        "data": "2019-01-01",
+        "titulo": "Bolsonaro publica vídeo antes da posse agradecendo aos eleitores"
+      },
+      {
+        "id": 101384,
+        "data": "2019-01-01",
+        "titulo": "Acompanhe ao vivo no R7 a posse de Jair Bolsonaro em Brasília"
+      },
+      {
+        "id": 101529,
+        "data": "2019-01-04",
+        "titulo": "'Não pretendo conversar com Queiroz', diz Jair Bolsonaro"
+      },
+      {
+        "id": 101689,
+        "data": "2019-01-07",
+        "titulo": "Bolsonaro faz hoje a segunda reunião com todos os ministros"
+      },
+      {
+        "id": 101880,
+        "data": "2019-01-09",
+        "titulo": "Perfis do governo fazem publicações a favor de Bolsonaro -"
+      },
+      {
+        "id": 102736,
+        "data": "2019-01-10",
+        "titulo": "Palácio do Planalto divulga foto oficial de Jair Bolsonaro"
+      },
+      {
+        "id": 102891,
+        "data": "2019-01-11",
+        "titulo": "Editorial do ‘The New York Times’ diz que Bolsonaro tem 'performance triste' -"
+      },
+      {
+        "id": 38818,
+        "data": "2020-02-14",
+        "titulo": "Mendes desafia Bolsonaro concluir ferrovia de MT ao Pará"
+      },
+      {
+        "id": 39503,
+        "data": "2020-02-16",
+        "titulo": "Fernández diz que não vai à posse no Uruguai e adia encontro com Bolsonaro"
+      },
+      {
+        "id": 39809,
+        "data": "2020-02-18",
+        "titulo": "Partido de Bolsonaro prepara encontro no Espírito Santo"
+      },
+      {
+        "id": 40218,
+        "data": "2020-02-20",
+        "titulo": "Bolsonaro critica Cid em live e diz não ter habilitação para dirigir retroescavadeira"
+      },
+      {
+        "id": 85933,
+        "data": "2020-02-29",
+        "titulo": "Bolsonaro diz em evento do Aliança que apoiador tem '8 arrobas'"
+      },
+      {
+        "id": 85934,
+        "data": "2020-03-01",
+        "titulo": "Bolsonaro participa da posse de Lacalle Pou no Uruguai neste domingo"
+      },
+      {
+        "id": 85967,
+        "data": "2020-03-01",
+        "titulo": "Em posse de presidente uruguaio, Bolsonaro é aplaudido e vaiado em frente ao Congresso"
+      },
+      {
+        "id": 87239,
+        "data": "2020-03-05",
+        "titulo": "‘Stand-up’ de Bolsonaro repercute negativamente no país e no exterior"
+      },
+      {
+        "id": 87286,
+        "data": "2020-03-05",
+        "titulo": "Sócio de Huck e apoiador de Bolsonaro, dono do Madero adere a atos anti-Congresso"
+      },
+      {
+        "id": 87442,
+        "data": "2020-03-06",
+        "titulo": "Bolsonaro assina decreto para Brasil aderir a programa de entrada rápida nos EUA"
+      },
+      {
+        "id": 15871,
+        "data": "2021-02-14",
+        "titulo": "Eduardo Bolsonaro aproveita aglomeração em SC, provoca Lula e cobra apoio"
+      },
+      {
+        "id": 18148,
+        "data": "2021-02-18",
+        "titulo": "Huck, que disse ter ‘amor fraterno’ por general"
+      },
+      {
+        "id": 18705,
+        "data": "2021-02-21",
+        "titulo": "Bolsonaro confirma vinda ao Acre na quarta-feira para acompanhar situação dos alagados - ECOACRE.NET"
+      },
+      {
+        "id": 19584,
+        "data": "2021-02-21",
+        "titulo": "Após cheia, Bolsonaro promete visitar o Acre próxima quarta-feira"
+      },
+      {
+        "id": 20025,
+        "data": "2021-02-24",
+        "titulo": "Presidente Jair Bolsonaro chega ao Acre - ECOACRE.NET"
+      },
+      {
+        "id": 20569,
+        "data": "2021-02-26",
+        "titulo": "Bolsonaro: diálogos entre Dallagnol e MP revelam 'perseguição à minha família'"
+      },
+      {
+        "id": 35239,
+        "data": "2021-03-13",
+        "titulo": "Bolsonaro recebe chanceler e deputado no Alvorada"
+      },
+      {
+        "id": 37835,
+        "data": "2021-03-25",
+        "titulo": "Brito: Bolsonaro está só e isso faz dele mais perigoso - OEstadoAcre.com"
+      },
+      {
+        "id": 38319,
+        "data": "2021-03-30",
+        "titulo": "Azevedo admite pressão para envolver Forças Armadas na política"
+      },
+      {
+        "id": 166474,
+        "data": "2021-04-12",
+        "titulo": "Em áudio, Bolsonaro fala em 'sair na porrada' com líder da oposição"
+      }
+    ],
+    "score_llm": 14,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 14\nFORA: [22, 29, 30]\nAVALIACAO: Notícias focadas no Palácio do Alvorada e atividades do presidente são predominantes.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: O score de 14 indica que a maioria das amostras não se encaixam no tópico, mas há algum conteúdo relevante.",
+    "flaggado": true
+  },
+  "1": {
+    "id": 1,
+    "nome": "Combustíveis e Petrobras",
+    "total": 425,
+    "amostras": [
+      {
+        "id": 102588,
+        "data": "2019-01-10",
+        "titulo": "Petrobras abre processo para arrendar fábricas de fertilizantes na Bahia e em Sergipe -"
+      },
+      {
+        "id": 102656,
+        "data": "2019-01-10",
+        "titulo": "Petrobras reduz preço do gás de cozinha para comércio e indústria em 3,4% -"
+      },
+      {
+        "id": 103528,
+        "data": "2019-01-15",
+        "titulo": "Parada em refinaria da Petrobras deixa aviões agrícolas sem combustível -"
+      },
+      {
+        "id": 103746,
+        "data": "2019-01-17",
+        "titulo": "Com aval da AGU, Petrobras decide retomar venda de gasoduto e refinarias -"
+      },
+      {
+        "id": 107392,
+        "data": "2019-01-18",
+        "titulo": "Localiza anuncia venda de 46 milhões de ações e pode levar R$ 1,4 bilhão -"
+      },
+      {
+        "id": 108353,
+        "data": "2019-01-24",
+        "titulo": "Petrobras reduz em 2,5% preço médio da gasolina nas refinarias nesta sexta-feira"
+      },
+      {
+        "id": 109065,
+        "data": "2019-01-28",
+        "titulo": "Petrobras pode retomar venda de Braskem e avalia futuro da BR, diz presidente -"
+      },
+      {
+        "id": 109540,
+        "data": "2019-01-30",
+        "titulo": "Petrobras vende refinaria de Pasadena para empresa francesa"
+      },
+      {
+        "id": 109598,
+        "data": "2019-01-30",
+        "titulo": "Petrobras vende refinaria de Pasadena à americana Chevron por cerca de R$ 2 bilhões -"
+      },
+      {
+        "id": 109691,
+        "data": "2019-01-30",
+        "titulo": "Petrobras deposita R$ 2,5 bilhões em fundo a ser investido em ações anticorrupção -"
+      },
+      {
+        "id": 60379,
+        "data": "2020-06-26",
+        "titulo": "Petrobras inicia produção no pré-sal de Atapu, na Bacia de Santos"
+      },
+      {
+        "id": 60674,
+        "data": "2020-06-26",
+        "titulo": "Petrobras anuncia venda de Urucu e saída do processo explorar gás e petróleo"
+      },
+      {
+        "id": 17280,
+        "data": "2020-06-27",
+        "titulo": "Petrobras espera acordo sobre Búzios até fim do ano, com aprovação da ANP em 2021"
+      },
+      {
+        "id": 19206,
+        "data": "2020-06-27",
+        "titulo": "Petrobras aprova nova rodada de ofertas vinculantes para Polo Urucu"
+      },
+      {
+        "id": 25598,
+        "data": "2020-06-27",
+        "titulo": "Petrobras inicia venda de participação em duas transportadoras de gás"
+      },
+      {
+        "id": 26100,
+        "data": "2020-06-27",
+        "titulo": "Federação pede que Cade suspenda venda de refinarias da Petrobras"
+      },
+      {
+        "id": 27831,
+        "data": "2020-06-27",
+        "titulo": "Eletricitários cobram ação da Aneel no AP e rechaçam privatização da Eletronorte"
+      },
+      {
+        "id": 29459,
+        "data": "2020-06-27",
+        "titulo": "Petrobras informa anulação de sentença da Petros e Previ em Câmara de arbitragem"
+      },
+      {
+        "id": 30289,
+        "data": "2020-06-27",
+        "titulo": "Petrobras divulga teaser referente venda de 50% de 4 ativos na Bacia de Campos"
+      },
+      {
+        "id": 33174,
+        "data": "2020-06-27",
+        "titulo": "Caoa anuncia investimento de R$ 1,5 bilhão em cinco anos na fábrica de Goiás"
+      },
+      {
+        "id": 128717,
+        "data": "2021-09-23",
+        "titulo": "ICMS e preço dos combustíveis: Faltou o principal, Orlando! - OEstadoAcre.com"
+      },
+      {
+        "id": 128936,
+        "data": "2021-09-25",
+        "titulo": "Carestia: Restaurante em Rio Branco parou de oferecer filé - OEstadoAcre.com"
+      },
+      {
+        "id": 130905,
+        "data": "2021-09-27",
+        "titulo": "‘Tudo o que excede R$ 2 não é nossa responsabilidade’, diz Petrobras sobre alta da gasolina"
+      },
+      {
+        "id": 130909,
+        "data": "2021-09-27",
+        "titulo": "Casagrande congela ICMS dos combustíveis para evitar novos aumentos"
+      },
+      {
+        "id": 131080,
+        "data": "2021-09-29",
+        "titulo": "Ciro: 'Vou tomar a Petrobras de volta' - OEstadoAcre.com"
+      },
+      {
+        "id": 158905,
+        "data": "2021-09-29",
+        "titulo": "Os aumentos não param – Petrobras SOBE PREÇO do diesel em 8,9%"
+      },
+      {
+        "id": 131109,
+        "data": "2021-09-30",
+        "titulo": "Alta da gasolina: O que oestadoacre já disse 'O Globo' repete hoje - OEstadoAcre.com"
+      },
+      {
+        "id": 158920,
+        "data": "2021-10-06",
+        "titulo": "Preço da gasolina: Mais uma enganação do presidente da Câmara - OEstadoAcre.com"
+      },
+      {
+        "id": 159584,
+        "data": "2021-10-09",
+        "titulo": "Na Venezuela você enche o tanque do carro com R$ 5 - OEstadoAcre.com"
+      },
+      {
+        "id": 162521,
+        "data": "2021-10-25",
+        "titulo": "Que coisa chata! Noticiar aumento da gasolina (não dá audiência mais!) - OEstadoAcre.com"
+      }
+    ],
+    "score_llm": 18,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 18\nFORA: [21, 22, 30] - Estes títulos não tratam diretamente do tema central do tópico.\nAVALIACAO: A maioria das notícias foca na Petrobras e seus combustíveis, embora alguns sejam mais periféricos.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: A maioria das notícias foca na Petrobras e seus combustíveis, mas o score é insuficiente.",
+    "flaggado": true
+  },
+  "5": {
+    "id": 5,
+    "nome": "Manifestações políticas",
+    "total": 310,
+    "amostras": [
+      {
+        "id": 102603,
+        "data": "2019-01-10",
+        "titulo": "Entidades protestam contra a extinção da Justiça do Trabalho -"
+      },
+      {
+        "id": 107672,
+        "data": "2019-01-20",
+        "titulo": "De verde e amarelo, manifestantes voltam à Paulista contra Renan na presidência do Senado -"
+      },
+      {
+        "id": 107878,
+        "data": "2019-01-22",
+        "titulo": "Primeiro protesto após Doria endurecer regra teve drible na PM e mascarados -"
+      },
+      {
+        "id": 126891,
+        "data": "2019-03-23",
+        "titulo": "Sindicatos fazem protesto contra a reforma da Previdência"
+      },
+      {
+        "id": 127731,
+        "data": "2019-03-30",
+        "titulo": "Como ordem de Bolsonaro para comemorar golpe de 1964 se transformou em problema burocrático para as Forças Armadas"
+      },
+      {
+        "id": 127742,
+        "data": "2019-03-31",
+        "titulo": "Manifestantes se reúnem em ato contra ditadura militar no Rio"
+      },
+      {
+        "id": 134308,
+        "data": "2019-05-01",
+        "titulo": "Centrais sindicais convocam greve contra reforma da Previdência"
+      },
+      {
+        "id": 134372,
+        "data": "2019-05-01",
+        "titulo": "Bolsonaro fará pronunciamento em rede nacional pelo Dia do Trabalho"
+      },
+      {
+        "id": 134375,
+        "data": "2019-05-01",
+        "titulo": "Reforma da Previdência é alvo de trabalhadores no 1º de Maio"
+      },
+      {
+        "id": 136314,
+        "data": "2019-05-06",
+        "titulo": "Estudantes protestam contra Bolsonaro no Rio de Janeiro"
+      },
+      {
+        "id": 53849,
+        "data": "2020-06-06",
+        "titulo": "Torcedores pró-democracia criticam decisão que proíbe ato na Paulista"
+      },
+      {
+        "id": 54041,
+        "data": "2020-06-07",
+        "titulo": "Protesto anti-Bolsonaro em Brasília tem veto da PM, aglomeração e gritos por democracia e contra racismo"
+      },
+      {
+        "id": 54090,
+        "data": "2020-06-07",
+        "titulo": "Manifestantes ignoram Bolsonaro e pedem intervenção em ato na Paulista"
+      },
+      {
+        "id": 54096,
+        "data": "2020-06-07",
+        "titulo": "Brasil vive novo domingo de atos a favor e contra o governo"
+      },
+      {
+        "id": 54147,
+        "data": "2020-06-07",
+        "titulo": "Capitais registram manifestações contra e pró-governo sem confronto"
+      },
+      {
+        "id": 54137,
+        "data": "2020-06-08",
+        "titulo": "Militantes bolsonaristas usam atos para impulsionar pré-candidaturas"
+      },
+      {
+        "id": 54141,
+        "data": "2020-06-08",
+        "titulo": "Protesto mancha Planalto de vermelho, e Bolsonaro fala em 'mangas de fora' em atos contra governo"
+      },
+      {
+        "id": 54177,
+        "data": "2020-06-08",
+        "titulo": "Após ataque de Olavo a Hang, empresários bolsonaristas negam dinheiro a guru"
+      },
+      {
+        "id": 54240,
+        "data": "2020-06-08",
+        "titulo": "Mobilizada por protestos, cúpula da F-1 diz que pretende incentivar diversidade"
+      },
+      {
+        "id": 59159,
+        "data": "2020-06-08",
+        "titulo": "Mira Jornal"
+      },
+      {
+        "id": 44756,
+        "data": "2022-02-21",
+        "titulo": "Visita de Bolsonaro à região de Votuporanga movimenta classe política - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 44641,
+        "data": "2022-02-22",
+        "titulo": "Grupo organiza comboio de Votuporanga e região para motociata com Bolsonaro - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 44837,
+        "data": "2022-02-23",
+        "titulo": "Em Rio Preto, Bolsonaro evita polêmicas e discursa sobre liberdade para apoiadores - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 152212,
+        "data": "2022-03-08",
+        "titulo": "'Comunidade do Antimari está abandonada pelo governo' - OEstadoAcre.com"
+      },
+      {
+        "id": 93548,
+        "data": "2022-04-29",
+        "titulo": "Volta Redonda terá manifestação pró-Bolsonaro em 1º de maio"
+      },
+      {
+        "id": 130405,
+        "data": "2022-05-01",
+        "titulo": "Manifestações a favor de Lula e Bolsonaro marcam este domingo (01) no Rio"
+      },
+      {
+        "id": 130685,
+        "data": "2022-05-04",
+        "titulo": "Vargem participa de Marcha em Brasília"
+      },
+      {
+        "id": 83571,
+        "data": "2022-06-24",
+        "titulo": "Movimento Vem Pra Direita realiza 1° Encontro Conservador do Sul Fluminense"
+      },
+      {
+        "id": 123372,
+        "data": "2022-08-04",
+        "titulo": "Vargengrandenses assinam carta em defesa do Estado Democrático de Direito"
+      },
+      {
+        "id": 70292,
+        "data": "2022-09-07",
+        "titulo": "Desfile em comemoração ao Bicentenário reúne multidão na Esplanada - Jornal A Cidade de Votuporanga"
+      }
+    ],
+    "score_llm": 20,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 20\nFORA: [21, 22, 23, 25, 26, 27, 28, 29, 30]\nAVALIACAO: A maioria das notícias se concentra em protestos e manifestações políticas, mas algumas se desviam para outros assuntos.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: O score de 20 indica que a maioria das notícias se desvia para outros assuntos, mas há ainda algum foco nas manifestações políticas.",
+    "flaggado": true
+  },
+  "4": {
+    "id": 4,
+    "nome": "Fake news e redes sociais",
+    "total": 201,
+    "amostras": [
+      {
+        "id": 107748,
+        "data": "2019-01-21",
+        "titulo": "'Vamos para Wickr Me, Signal, Telegram', diz Eduardo Bolsonaro sobre limite de reenvio no WhatsApp -"
+      },
+      {
+        "id": 108234,
+        "data": "2019-01-23",
+        "titulo": "WhatsApp nega ter registros que possam levar aos disseminadores de fake news -"
+      },
+      {
+        "id": 108285,
+        "data": "2019-01-23",
+        "titulo": "Fake news inventa falso desacordo entre Governo do Maranhão e LATAM"
+      },
+      {
+        "id": 108345,
+        "data": "2019-01-23",
+        "titulo": "FAKE NEWS É CRIME"
+      },
+      {
+        "id": 108211,
+        "data": "2019-01-24",
+        "titulo": "Campeões nas fake news, mais velhos também compartilham mais checagens de fatos -"
+      },
+      {
+        "id": 109588,
+        "data": "2019-01-30",
+        "titulo": "Acredite, tem gente que espalha fake news e atrapalha resgates em Brumadinho -"
+      },
+      {
+        "id": 115258,
+        "data": "2019-02-22",
+        "titulo": "Tim Cook e outros CEOs participarão de comitê sobre fake news | MacMagazine.com.br"
+      },
+      {
+        "id": 118305,
+        "data": "2019-02-26",
+        "titulo": "'Meliantes vazaram meias verdades', diz secretário da Receita"
+      },
+      {
+        "id": 127651,
+        "data": "2019-03-29",
+        "titulo": "Por que a ciência é tão importante neste momento de mentiras e fake news"
+      },
+      {
+        "id": 119975,
+        "data": "2019-04-09",
+        "titulo": "Índia realiza maior eleição do mundo em meio a temor de fake news"
+      },
+      {
+        "id": 68733,
+        "data": "2020-05-27",
+        "titulo": "Moraes diz que 11 perfis no Twitter coordenam rede de fake news"
+      },
+      {
+        "id": 68734,
+        "data": "2020-05-27",
+        "titulo": "Moraes, do STF, aponta 'mecanismo coordenado' de fake news"
+      },
+      {
+        "id": 68741,
+        "data": "2020-05-27",
+        "titulo": "Senado vai votar lei para combater fake news, diz Alcolumbre"
+      },
+      {
+        "id": 68802,
+        "data": "2020-05-28",
+        "titulo": "Moro “celebra” ação do STF em inquérito das Fake News"
+      },
+      {
+        "id": 68852,
+        "data": "2020-05-28",
+        "titulo": "Não teremos outro dia como ontem, chega, diz Bolsonaro em recado ao Supremo"
+      },
+      {
+        "id": 68994,
+        "data": "2020-05-28",
+        "titulo": "Weintraub critica operação da PF para inquérito das fake news"
+      },
+      {
+        "id": 69019,
+        "data": "2020-05-29",
+        "titulo": "Plataformas se movimentam para desidratar projeto no Congresso que prevê punição por fake news"
+      },
+      {
+        "id": 69036,
+        "data": "2020-05-29",
+        "titulo": "Projetos no Congresso querem responsabilizar redes sociais por disseminação de fake news"
+      },
+      {
+        "id": 69150,
+        "data": "2020-05-29",
+        "titulo": "CPI das Fake News na Assembleia de SP ganha novo fôlego após operação do STF contra bolsonaristas"
+      },
+      {
+        "id": 52073,
+        "data": "2020-05-31",
+        "titulo": "'Maior dos fake news é o gabinete do ódio', afirma Bolsonaro"
+      },
+      {
+        "id": 9339,
+        "data": "2020-08-03",
+        "titulo": "WhatsApp agora facilita verificar links com fake news – MacMagazine.com.br"
+      },
+      {
+        "id": 12908,
+        "data": "2020-08-17",
+        "titulo": "Barroso: Judiciário não tem como “paralisar” fake news"
+      },
+      {
+        "id": 14543,
+        "data": "2020-08-23",
+        "titulo": "“Fake news se tornaram um monstro sofisticado”, afirma advogado especialista em Ciência Política"
+      },
+      {
+        "id": 16324,
+        "data": "2020-08-26",
+        "titulo": "Moradora de Campanha é indiciada por espalhar fake news"
+      },
+      {
+        "id": 95738,
+        "data": "2020-09-02",
+        "titulo": "Venancinho bomba na internet e assusta Gonçalos que reagem usando blogs aliados para espalharem fake news"
+      },
+      {
+        "id": 98265,
+        "data": "2020-09-08",
+        "titulo": "Fake News: deputados querem chegar a financiadores, diz Maia"
+      },
+      {
+        "id": 99992,
+        "data": "2020-09-11",
+        "titulo": "Ex-secretário repudia fake news e anuncia medidas judiciais"
+      },
+      {
+        "id": 100102,
+        "data": "2020-09-13",
+        "titulo": "André Maia promove fake news até na composição de sua candidatura à reeleição"
+      },
+      {
+        "id": 105720,
+        "data": "2020-09-26",
+        "titulo": "Coronel Velozo / Fake News: a verdade sobre a mentira"
+      },
+      {
+        "id": 105935,
+        "data": "2020-09-29",
+        "titulo": "Em ano eleitoral a FAKE NEWS ameaça a democracia"
+      }
+    ],
+    "score_llm": 26,
+    "score_max": 30,
+    "veredito": "manter",
+    "relatorio_validador": "SCORE: 26\nFORA: 2019-01-21, 2019-01-23, 2019-01-24\nAVALIACAO: A maioria das notícias foca diretamente em fake news e redes sociais, com discussões sobre legislação, impacto e combate.",
+    "relatorio_auditor": "VEREDITO: manter\nJUSTIFICATIVA: O score de 26 indica que a maioria das amostras estão dentro do limite de 30%, justificando a manutenção do tópico.",
+    "flaggado": false
+  },
+  "7": {
+    "id": 7,
+    "nome": "Sergio Moro e Justiça",
+    "total": 196,
+    "amostras": [
+      {
+        "id": 101443,
+        "data": "2019-01-02",
+        "titulo": "Moro recebe cargo de ministro da Justiça e promete reduzir corrupção"
+      },
+      {
+        "id": 101902,
+        "data": "2019-01-08",
+        "titulo": "Bolsonaro alega risco e determina que PF amplie segurança de Moro -"
+      },
+      {
+        "id": 102707,
+        "data": "2019-01-10",
+        "titulo": "Bolsonaro e Moro são tietados em festa de despedida de comandante do Exército -"
+      },
+      {
+        "id": 107373,
+        "data": "2019-01-18",
+        "titulo": "Opositor se encontra com Sergio Moro e defende sanções contra Maduro -"
+      },
+      {
+        "id": 107424,
+        "data": "2019-01-18",
+        "titulo": "Defensor de fim do foro, Moro já chamou prerrogativa de escudo para impunidade -"
+      },
+      {
+        "id": 107606,
+        "data": "2019-01-20",
+        "titulo": "Em Davos, Moro defenderá que corrupção afeta credibilidade no mercado global -"
+      },
+      {
+        "id": 107739,
+        "data": "2019-01-21",
+        "titulo": "Em Davos, Moro dirá que corrupção prejudica também os mercados"
+      },
+      {
+        "id": 107769,
+        "data": "2019-01-22",
+        "titulo": "Em Davos, Moro fala sobre corrupção, mas não de caso Flávio Bolsonaro -"
+      },
+      {
+        "id": 109238,
+        "data": "2019-01-29",
+        "titulo": "Moro cria grupo para avaliar revisão de normas do BC sobre lavagem de dinheiro -"
+      },
+      {
+        "id": 113002,
+        "data": "2019-02-06",
+        "titulo": "Governo retifica ato de exoneração de ministro do Turismo"
+      },
+      {
+        "id": 48682,
+        "data": "2020-04-24",
+        "titulo": "“O presidente não me quer no cargo”, afirma Moro ao pedir demissão do governo Bolsonaro"
+      },
+      {
+        "id": 48694,
+        "data": "2020-04-24",
+        "titulo": "Bolsonaro acusa Moro de negociar vaga no STF e admite interesse pessoal em ações da PF"
+      },
+      {
+        "id": 48717,
+        "data": "2020-04-24",
+        "titulo": "Governadores criticam Bolsonaro, lamentam saída de Moro e lhe oferecem cargos"
+      },
+      {
+        "id": 48719,
+        "data": "2020-04-24",
+        "titulo": "'Não é bom', diz Mourão à reportagem sobre saída de Moro do governo"
+      },
+      {
+        "id": 48725,
+        "data": "2020-04-24",
+        "titulo": "Saída de Moro do governo ganha destaque na mídia americana e América Latina"
+      },
+      {
+        "id": 48741,
+        "data": "2020-04-24",
+        "titulo": "Bolsonaro diz que Moro só se preocupa com o próprio ego, e não com o Brasil - ECOACRE.NET"
+      },
+      {
+        "id": 48742,
+        "data": "2020-04-24",
+        "titulo": "“Moro foi um grande ministro para o Acre”, diz Gladson Cameli - ECOACRE.NET"
+      },
+      {
+        "id": 48743,
+        "data": "2020-04-24",
+        "titulo": "Sergio Moro, o juiz da Lava Jato, anuncia sua demissão do governo Bolsonaro - ECOACRE.NET"
+      },
+      {
+        "id": 48750,
+        "data": "2020-04-24",
+        "titulo": "Moro responde a Bolsonaro e diz que não pediu vaga no STF para aceitar demissão de Valeixo"
+      },
+      {
+        "id": 48759,
+        "data": "2020-04-24",
+        "titulo": "Centrão assume defesa do presidente e nega clima de impeachment"
+      },
+      {
+        "id": 65089,
+        "data": "2020-05-13",
+        "titulo": "PF ouve Carla Zambelli, Carlos Oliveira e Alexandre Saraiva em inquérito"
+      },
+      {
+        "id": 65186,
+        "data": "2020-05-13",
+        "titulo": "Moro diz que seria retaliação manter apuração contra ele no Conselho de Ética da Presidência"
+      },
+      {
+        "id": 65235,
+        "data": "2020-05-13",
+        "titulo": "Carla Zambelli irá mostrar à PF histórico de mensagens com Moro"
+      },
+      {
+        "id": 65346,
+        "data": "2020-05-14",
+        "titulo": "Fim de inquérito sobre acusações de Moro deve influenciar adesão do Brasil à OCDE"
+      },
+      {
+        "id": 65753,
+        "data": "2020-05-14",
+        "titulo": "Delegados de casos Marielle e Adélio serão ouvidos pela PF no caso Moro"
+      },
+      {
+        "id": 65730,
+        "data": "2020-05-15",
+        "titulo": "'Cenário difícil', diz Moro após saída de Teich do Ministério da Saúde"
+      },
+      {
+        "id": 66823,
+        "data": "2020-05-19",
+        "titulo": "Caso Moro: Aras deve pedir inclusão de depoimento de Bolsonaro"
+      },
+      {
+        "id": 66832,
+        "data": "2020-05-19",
+        "titulo": "Caso Moro: Fui procurado por Ramagem, diz ex-chefe da PF no RJ"
+      },
+      {
+        "id": 67365,
+        "data": "2020-05-22",
+        "titulo": "Heleno ameaça: apreender celular do presidente pode ter consequências imprevisíveis"
+      },
+      {
+        "id": 67401,
+        "data": "2020-05-22",
+        "titulo": "\"A verdade foi dita, exposta em vídeo\", afirma Sérgio Moro"
+      }
+    ],
+    "score_llm": 20,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 20\nFORA: 10, 13, 14, 17\nAVALIACAO: Notícias focadas em Sergio Moro como ministro da Justiça e suas ações, com menção ao tema da justiça.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: O score de 20 indica que a notícia está abaixo da média esperada.",
+    "flaggado": true
+  },
+  "3": {
+    "id": 3,
+    "nome": "Saúde e hospitais",
+    "total": 183,
+    "amostras": [
+      {
+        "id": 101372,
+        "data": "2019-01-01",
+        "titulo": "Bolsonaro 'está muito bem', dizem médicos que o socorreram"
+      },
+      {
+        "id": 103067,
+        "data": "2019-01-12",
+        "titulo": "Fabrício Queiroz diz que dança no hospital foi para alegrar enfermaria"
+      },
+      {
+        "id": 103068,
+        "data": "2019-01-12",
+        "titulo": "Queiroz diz que dança no hospital foi para levar alegria à enfermaria"
+      },
+      {
+        "id": 107452,
+        "data": "2019-01-19",
+        "titulo": "Flávio Bolsonaro visita o pai no Alvorada após revelação de depósitos suspeitos -"
+      },
+      {
+        "id": 107736,
+        "data": "2019-01-21",
+        "titulo": "Bolsonaro deve viajar a São Paulo no próximo domingo para cirurgia"
+      },
+      {
+        "id": 107750,
+        "data": "2019-01-21",
+        "titulo": "Governo montará estrutura de gabinete para Bolsonaro despachar de hospital -"
+      },
+      {
+        "id": 108753,
+        "data": "2019-01-26",
+        "titulo": "Bolsonaro avisa Congresso que ficará afastado do cargo até 48 horas após cirurgia -"
+      },
+      {
+        "id": 108784,
+        "data": "2019-01-26",
+        "titulo": "O que é a cirurgia de colostomia e reversão a que se submeterá o presidente? -"
+      },
+      {
+        "id": 108804,
+        "data": "2019-01-26",
+        "titulo": "Cirurgia de Bolsonaro deve durar ao menos 3 horas; entenda o passo a passo -"
+      },
+      {
+        "id": 108930,
+        "data": "2019-01-27",
+        "titulo": "Bolsonaro passa por exames e avaliação pré-operatória no hospital Albert Einstein -"
+      },
+      {
+        "id": 113253,
+        "data": "2019-02-09",
+        "titulo": "Bolsonaro faz caminhada e não tem compromissos no fim de semana"
+      },
+      {
+        "id": 113257,
+        "data": "2019-02-09",
+        "titulo": "Bolsonaro publica foto almoçando no hospital e mostra recuperação"
+      },
+      {
+        "id": 113312,
+        "data": "2019-02-09",
+        "titulo": "Bolsonaro segue sem febre e tem boa evolução clínico-cirúrgica"
+      },
+      {
+        "id": 113314,
+        "data": "2019-02-10",
+        "titulo": "Bolsonaro inicia neste domingo a redução da alimentação na veia"
+      },
+      {
+        "id": 113315,
+        "data": "2019-02-10",
+        "titulo": "Em vídeo, Bolsonaro cobra que PF encontre mandantes de facada"
+      },
+      {
+        "id": 114034,
+        "data": "2019-02-10",
+        "titulo": "Presidente Bolsonaro espera ter alta médica na terça-feira"
+      },
+      {
+        "id": 114103,
+        "data": "2019-02-12",
+        "titulo": "Do hospital, Bolsonaro participa de reunião com Onyx e Toffoli"
+      },
+      {
+        "id": 114186,
+        "data": "2019-02-12",
+        "titulo": "Bolsonaro poderá ter alta já nesta quarta-feira, indica porta-voz"
+      },
+      {
+        "id": 114036,
+        "data": "2019-02-13",
+        "titulo": "Bolsonaro toma hoje última dose de antibiótico e médicos avaliam alta"
+      },
+      {
+        "id": 114169,
+        "data": "2019-02-13",
+        "titulo": "Bolsonaro recebe alta, deixa hospital e segue para Brasília"
+      },
+      {
+        "id": 53829,
+        "data": "2020-06-05",
+        "titulo": "Bolsonaro se desequilibra e quase cai em inauguração de hospital"
+      },
+      {
+        "id": 58944,
+        "data": "2020-06-20",
+        "titulo": "Ex-assessor de Flávio Bolsonaro não era paciente, dizem hospitais de Atibaia"
+      },
+      {
+        "id": 33273,
+        "data": "2020-06-27",
+        "titulo": "Bolsonaro faz exames de rotina no serviço médico do Palácio do Planalto"
+      },
+      {
+        "id": 77927,
+        "data": "2020-06-27",
+        "titulo": "Presidente do TCU tem alta hospitalar após internação por covid-19"
+      },
+      {
+        "id": 79095,
+        "data": "2020-07-06",
+        "titulo": "Com febre, Bolsonaro realiza exame da Covid-19"
+      },
+      {
+        "id": 82408,
+        "data": "2020-07-19",
+        "titulo": "Hospitalizado em Mato Grosso, cacique Raoni tem quadro estável"
+      },
+      {
+        "id": 85772,
+        "data": "2020-07-30",
+        "titulo": "Bolsonaro diz que ele e ministros tomaram cloroquina e 'funcionou'"
+      },
+      {
+        "id": 11609,
+        "data": "2020-08-12",
+        "titulo": "Após exames em SP, Bolsonaro está 'liberado para atividades habituais'"
+      },
+      {
+        "id": 16416,
+        "data": "2020-08-26",
+        "titulo": "Irmão de Petecão: X retorna à UTI em São Paulo - OEstadoAcre.com"
+      },
+      {
+        "id": 95595,
+        "data": "2020-09-01",
+        "titulo": "Bolsonaro é diagnosticado com cálculo renal"
+      }
+    ],
+    "score_llm": 20,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 20\nFORA: 22, 24, 29\nAVALIACAO: A maioria das notícias foca no estado de saúde de Bolsonaro, mas algumas se desviaram para outros assuntos.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: O score de 20% está abaixo da média desejada, indicando que a maioria das notícias se desvia do tópico principal.",
+    "flaggado": true
+  },
+  "12": {
+    "id": 12,
+    "nome": "Eleições estaduais SP",
+    "total": 160,
+    "amostras": [
+      {
+        "id": 101363,
+        "data": "2019-01-01",
+        "titulo": "Governador do Amapá toma posse durante a madrugada"
+      },
+      {
+        "id": 102611,
+        "data": "2019-01-10",
+        "titulo": "Parte dos deputados estaduais do PSL vira-se contra Witzel -"
+      },
+      {
+        "id": 103945,
+        "data": "2019-01-18",
+        "titulo": "Ex-capitão da PM aposta no antipetismo para vencer Maia na Câmara -"
+      },
+      {
+        "id": 108936,
+        "data": "2019-01-27",
+        "titulo": "Governadores do PSL nomeiam colegas de partido para o Executivo -"
+      },
+      {
+        "id": 109712,
+        "data": "2019-01-31",
+        "titulo": "Disputa pelo Senado opõe equipes política e econômica de Bolsonaro -"
+      },
+      {
+        "id": 109715,
+        "data": "2019-01-31",
+        "titulo": "Com maior bancada, PSL terá de 'engolir' PT na presidência da Assembleia do Rio -"
+      },
+      {
+        "id": 109902,
+        "data": "2019-01-31",
+        "titulo": "Deputados do Paraná tomam posse nesta sexta-feira e elegem novo comando -"
+      },
+      {
+        "id": 110033,
+        "data": "2019-02-01",
+        "titulo": "Deputados tomam posse nesta sexta e elegem comando da Alep -"
+      },
+      {
+        "id": 110192,
+        "data": "2019-02-01",
+        "titulo": "Traiano é eleito presidente da Assembleia pela terceira vez -"
+      },
+      {
+        "id": 153775,
+        "data": "2019-07-20",
+        "titulo": "Fora do PSL, Galli assume Patriota e usa imagem de Japonês da Federal para promover a sigla"
+      },
+      {
+        "id": 121722,
+        "data": "2022-08-01",
+        "titulo": "Mesa Diretora da Câmara de Votuporanga arquiva pedido para perda de mandato de Cabo Renato - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 121724,
+        "data": "2022-08-01",
+        "titulo": "Tarcísio oficializa candidatura ao governo paulista e exalta Bolsonaro - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 128582,
+        "data": "2022-08-15",
+        "titulo": "Candidato a deputado estadual, Danilo Barnabé, reúne apoiadores em Cesário Lange"
+      },
+      {
+        "id": 124928,
+        "data": "2022-08-16",
+        "titulo": "Kassab declara apoio a Tarcísio e a Marcos Pontes, candidatos de Bolsonaro em SP"
+      },
+      {
+        "id": 71949,
+        "data": "2022-09-13",
+        "titulo": "Eleição ao Governo de MS tem candidatos alvos de escândalos"
+      },
+      {
+        "id": 71950,
+        "data": "2022-09-13",
+        "titulo": "Campanha de Tarcísio diz que aposta na polarização explica vantagem sobre Rodrigo"
+      },
+      {
+        "id": 72340,
+        "data": "2022-09-18",
+        "titulo": "Tucanos veem PSDB neutro no 2º turno por divergência entre alas pró-Lula e pró-Bolsonaro"
+      },
+      {
+        "id": 94210,
+        "data": "2022-09-19",
+        "titulo": "Espírito Santo: Renato Casagrande (PSB) e Mannato (PL) vão disputar o 2º turno - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 73053,
+        "data": "2022-09-21",
+        "titulo": "Candidata a deputada, coronel Dulcinéia cresceu em Vargem Grande do Sul"
+      },
+      {
+        "id": 73052,
+        "data": "2022-09-22",
+        "titulo": "Polarização cristaliza na Bahia e acirra disputa nas ruas e na rede"
+      },
+      {
+        "id": 96480,
+        "data": "2022-10-08",
+        "titulo": "Carlão Pignatari volta a assumir o governo do Estado de São Paulo - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 96316,
+        "data": "2022-10-09",
+        "titulo": "Após apoio de Bolsonaro a adversário, tucano faz aceno à esquerda no MS - Juiz de Fora/MG"
+      },
+      {
+        "id": 96643,
+        "data": "2022-10-10",
+        "titulo": "Carlão Pignatari assume governo de SP após Rodrigo Garcia pedir licença"
+      },
+      {
+        "id": 96548,
+        "data": "2022-10-11",
+        "titulo": "Agronegócio de SP anuncia apoio em série a Tarcísio contra Haddad - Juiz de Fora/MG"
+      },
+      {
+        "id": 96639,
+        "data": "2022-10-11",
+        "titulo": "Haddad e Tarcísio discordam sobre sede do governo no centro - Juiz de Fora/MG"
+      },
+      {
+        "id": 96642,
+        "data": "2022-10-11",
+        "titulo": "Tarcísio e Haddad nacionalizam debate com vitrines e vidraças de Bolsonaro e Lula - Juiz de Fora/MG"
+      },
+      {
+        "id": 96775,
+        "data": "2022-10-11",
+        "titulo": "PSDB paulistano não endossa apoio tucano a Tarcísio de Freitas - Juiz de Fora/MG"
+      },
+      {
+        "id": 97435,
+        "data": "2022-10-12",
+        "titulo": "Após especulações sobre rompimento, Republicanos anunciará que mantém apoio a João"
+      },
+      {
+        "id": 97591,
+        "data": "2022-10-13",
+        "titulo": "Haddad repete 2012 e vai a Itaquera por benção de padre ligado a Alckmin - Juiz de Fora/MG"
+      },
+      {
+        "id": 97613,
+        "data": "2022-10-13",
+        "titulo": "Candidato à Alesp, Rossi analisou seu desempenho nas urnas"
+      }
+    ],
+    "score_llm": 6,
+    "score_max": 30,
+    "veredito": "manter",
+    "relatorio_validador": "SCORE: 6\nFORA: 11, 18, 21\nAVALIACAO: As notícias focam principalmente em candidatos a deputado estadual e governador, com ênfase na disputa pelo governo de São Paulo.",
+    "relatorio_auditor": "VEREDITO: manter\nJUSTIFICATIVA: O score de 6 indica que a maioria das amostras estão dentro do esperado, justificando a manutenção do tópico.",
+    "flaggado": true
+  },
+  "10": {
+    "id": 10,
+    "nome": "Polícia Federal e operações",
+    "total": 130,
+    "amostras": [
+      {
+        "id": 102906,
+        "data": "2019-01-12",
+        "titulo": "Criminosos derrubam torre de transmissão de energia no Ceará -"
+      },
+      {
+        "id": 107519,
+        "data": "2019-01-20",
+        "titulo": "Mais da metade dos roubos e furtos de armas em SP são em casas e comércios -"
+      },
+      {
+        "id": 107718,
+        "data": "2019-01-21",
+        "titulo": "Advogados e juízes promovem atos no Rio e em SP em defesa da Justiça do Trabalho -"
+      },
+      {
+        "id": 109283,
+        "data": "2019-01-29",
+        "titulo": "Operação da PF sobre Trump Hotel mira filho de ator e neto de ex-presidente brasileiro -"
+      },
+      {
+        "id": 109489,
+        "data": "2019-01-29",
+        "titulo": "Governo diz que nem todos os corpos soterrados serão resgatados em Brumadinho -"
+      },
+      {
+        "id": 109551,
+        "data": "2019-01-30",
+        "titulo": "PF considera neto do ex-presidente Figueiredo foragido e vai incluí-lo na lista da Interpol -"
+      },
+      {
+        "id": 127366,
+        "data": "2019-03-26",
+        "titulo": "PF investiga esquema de lavagem de dinheiro em tráfico de drogas"
+      },
+      {
+        "id": 170479,
+        "data": "2019-10-03",
+        "titulo": "PF deflagra operação sobre vazamentos do Copom para o BTG"
+      },
+      {
+        "id": 170681,
+        "data": "2019-10-07",
+        "titulo": "MPF investiga se PF faz 'cobrança abusiva' para emitir passaporte"
+      },
+      {
+        "id": 171440,
+        "data": "2019-10-11",
+        "titulo": "Collor é alvo de investigação da PF sobre lavagem de dinheiro"
+      },
+      {
+        "id": 80141,
+        "data": "2020-07-10",
+        "titulo": "Polícia de SP faz buscas na sede do MBL; suspeitos de lavagem de dinheiro são ligados ao movimento"
+      },
+      {
+        "id": 80180,
+        "data": "2020-07-10",
+        "titulo": "Empresários ligados ao MBL são presos por lavagem de dinheiro, diz MP"
+      },
+      {
+        "id": 82047,
+        "data": "2020-07-16",
+        "titulo": "Alckmin é indiciado pela PF sob suspeita de corrupção e lavagem de dinheiro"
+      },
+      {
+        "id": 82051,
+        "data": "2020-07-16",
+        "titulo": "Alckmin é indiciado pela PF sob suspeita de corrupção e lavagem de dinheiro"
+      },
+      {
+        "id": 9385,
+        "data": "2020-08-03",
+        "titulo": "PM investiga centenas de agentes que teriam recebido indevidamente o auxílio emergencial do governo"
+      },
+      {
+        "id": 11802,
+        "data": "2020-08-13",
+        "titulo": "Homens são presos no DF com R$ 28 mil sacados de beneficiários do Auxílio Emergencial"
+      },
+      {
+        "id": 14475,
+        "data": "2020-08-22",
+        "titulo": "Empresários suspeitos de fraudar licitação de limpeza em Curitiba são alvos de operação da polícia"
+      },
+      {
+        "id": 17045,
+        "data": "2020-08-31",
+        "titulo": "Agentes realizam operação no Rio e 18 estados contra lavagem de dinheiro do tráfico"
+      },
+      {
+        "id": 98796,
+        "data": "2020-09-11",
+        "titulo": "Quadrilha de estelionato, conto do bilhete e lavagem de dinheiro é indiciada no RS"
+      },
+      {
+        "id": 105972,
+        "data": "2020-09-29",
+        "titulo": "Lavagem de dinheiro do narcotráfico é alvo de investigação da Polícia Civil de Cruz Alta"
+      },
+      {
+        "id": 152356,
+        "data": "2022-03-10",
+        "titulo": "Vereador de Nilópolis é preso em operação da PF e do MP contra maior grupo miliciano do estado"
+      },
+      {
+        "id": 156088,
+        "data": "2022-03-21",
+        "titulo": "Polícia Federal investiga fraudes no auxílio emergencial - Jornal A Cidade de Votuporanga"
+      },
+      {
+        "id": 156287,
+        "data": "2022-03-23",
+        "titulo": "Polícia Civil deflagra operação contra lavagem de dinheiro do tráfico de drogas"
+      },
+      {
+        "id": 157305,
+        "data": "2022-03-25",
+        "titulo": "Polícia Civil cumpre mandados em Santa Fé do Sul durante operação para combater fake news"
+      },
+      {
+        "id": 87685,
+        "data": "2022-04-12",
+        "titulo": "Polícia Federal deflagra operação contra fraude ao Auxílio Emergencial no Rio"
+      },
+      {
+        "id": 93547,
+        "data": "2022-04-29",
+        "titulo": "PF prende funcionária da Caixa que fraudava auxílio emergencial"
+      },
+      {
+        "id": 135259,
+        "data": "2022-05-01",
+        "titulo": "Policia Federal faz operação contra suspeitos de assaltos à carros-fortes e lavagem de dinheiro"
+      },
+      {
+        "id": 77128,
+        "data": "2022-06-01",
+        "titulo": "Quadrilha especializada em fraudes no recebimento de auxílio emergencial é alvo de operação da PF na Baixada"
+      },
+      {
+        "id": 85017,
+        "data": "2022-06-28",
+        "titulo": "Polícia Federal cumpre mandados na região durante operação contra a lavagem de dinheiro"
+      },
+      {
+        "id": 124950,
+        "data": "2022-08-17",
+        "titulo": "Operação da PF, Receita e MP é deflagrada no Rio e mais quatro estados"
+      }
+    ],
+    "score_llm": 15,
+    "score_max": 30,
+    "veredito": "manter",
+    "relatorio_validador": "SCORE: 15\nFORA: 2019-01-12, 2019-01-20, 2019-01-21\nAVALIACAO: A maioria das notícias foca em operações da PF relacionadas a lavagem de dinheiro, corrupção e tráfico de drogas.",
+    "relatorio_auditor": "VEREDITO: manter\nJUSTIFICATIVA: O score de 15 indica que a maioria das notícias estão alinhadas com o tópico, superando a marca de 30%.",
+    "flaggado": true
+  },
+  "8": {
+    "id": 8,
+    "nome": "América Latina e Venezuela",
+    "total": 100,
+    "amostras": [
+      {
+        "id": 101945,
+        "data": "2019-01-09",
+        "titulo": "Comitê de Relações Exteriores dos EUA repreende aproximação com Bolsonaro -"
+      },
+      {
+        "id": 102584,
+        "data": "2019-01-10",
+        "titulo": "Em nota, Gleisi diz que eleição de Maduro foi legítima e constitucional -"
+      },
+      {
+        "id": 102599,
+        "data": "2019-01-10",
+        "titulo": "Venezuelanos pedem que Bolsonaro não reconheça posse de Maduro"
+      },
+      {
+        "id": 103441,
+        "data": "2019-01-15",
+        "titulo": "Brasil é simpático a ideia de criar alternativa à Unasul e isolar Venezuela -"
+      },
+      {
+        "id": 103543,
+        "data": "2019-01-15",
+        "titulo": "Criação de governo de transição na Venezuela ganha apoio no exterior -"
+      },
+      {
+        "id": 103547,
+        "data": "2019-01-16",
+        "titulo": "Bolsonaro e Macri discutem hoje Mercosul e crise na Venezuela"
+      },
+      {
+        "id": 103662,
+        "data": "2019-01-16",
+        "titulo": "Bolsonaro defende Mercosul enxuto e com relevância"
+      },
+      {
+        "id": 103681,
+        "data": "2019-01-16",
+        "titulo": "Ao lado de Bolsonaro, Macri ataca Maduro e defende Mercosul -"
+      },
+      {
+        "id": 103732,
+        "data": "2019-01-16",
+        "titulo": "Bolsonaro e Macri falam em renovar Mercosul e atacam Maduro"
+      },
+      {
+        "id": 103747,
+        "data": "2019-01-16",
+        "titulo": "Ao lado de Bolsonaro, Macri diz que Maduro é ditador que quer se perpetuar no poder -"
+      },
+      {
+        "id": 115372,
+        "data": "2019-02-25",
+        "titulo": "Mourão descarta uma intervenção militar na Venezuela"
+      },
+      {
+        "id": 118439,
+        "data": "2019-02-28",
+        "titulo": "Bolsonaro diz que vai atuar para restabelecer democracia na Venezuela"
+      },
+      {
+        "id": 126479,
+        "data": "2019-03-18",
+        "titulo": "Nos EUA, Bolsonaro destaca interesse em parcerias"
+      },
+      {
+        "id": 126599,
+        "data": "2019-03-19",
+        "titulo": "'Chegou o ocaso do socialismo em nosso hemisfério', diz Trump"
+      },
+      {
+        "id": 126602,
+        "data": "2019-03-19",
+        "titulo": "Bolsonaro não descarta apoio a ação militar dos EUA na Venezuela"
+      },
+      {
+        "id": 120150,
+        "data": "2019-04-11",
+        "titulo": "Brasil está de braços abertos, diz Bolsonaro a embaixadores árabes"
+      },
+      {
+        "id": 123185,
+        "data": "2019-04-30",
+        "titulo": "Bolsonaro afirma que Brasil se solidariza com povo da Venezuela"
+      },
+      {
+        "id": 134309,
+        "data": "2019-05-01",
+        "titulo": "Maioria é contra intervenção brasileira para derrubar Maduro"
+      },
+      {
+        "id": 134441,
+        "data": "2019-05-02",
+        "titulo": "Deputados defendem hospital militar na fronteira com a Venezuela"
+      },
+      {
+        "id": 134523,
+        "data": "2019-05-03",
+        "titulo": "Para Bolsonaro, volta de Kirchner faria Argentina virar nova Venezuela"
+      },
+      {
+        "id": 89440,
+        "data": "2020-03-16",
+        "titulo": "Bolsonaro sugere exigir exame de quem vem da Venezuela"
+      },
+      {
+        "id": 90083,
+        "data": "2020-03-17",
+        "titulo": "Bolsonaro anuncia fechamento da fronteira entre Brasil e Venezuela"
+      },
+      {
+        "id": 90086,
+        "data": "2020-03-18",
+        "titulo": "Contra coronavírus, Brasil fecha fronteira com Venezuela por 15 dias"
+      },
+      {
+        "id": 66489,
+        "data": "2020-05-17",
+        "titulo": "Bolsonaro diz que Brasil ajuda Guatemala no combate a queimadas"
+      },
+      {
+        "id": 67698,
+        "data": "2020-05-24",
+        "titulo": "Em 2006, Hugo Chávez defendeu armar 1 milhão de venezuelanos"
+      },
+      {
+        "id": 53639,
+        "data": "2020-06-05",
+        "titulo": "Comitê da Câmara dos EUA se opõe a acordo com Brasil"
+      },
+      {
+        "id": 78340,
+        "data": "2020-07-02",
+        "titulo": "Em cúpula, Lacalle Pou defende Mercosul sem alinhamento com EUA ou China"
+      },
+      {
+        "id": 79213,
+        "data": "2020-07-07",
+        "titulo": "Decisão sobre estudantes estrangeiros mostra Trump sob pressão eleitoral"
+      },
+      {
+        "id": 81538,
+        "data": "2020-07-13",
+        "titulo": "Senadores querem ir a Angola ajudar pastores agredidos"
+      },
+      {
+        "id": 85836,
+        "data": "2020-07-31",
+        "titulo": "Mourão critica quem associa governo a regimes militares"
+      }
+    ],
+    "score_llm": 22,
+    "score_max": 30,
+    "veredito": "revisar",
+    "relatorio_validador": "SCORE: 22\nFORA: [25, 28, 29]\nAVALIACAO: A maioria das notícias foca na relação entre Brasil e Venezuela, com destaque para a política de Bolsonaro.",
+    "relatorio_auditor": "VEREDITO: revisar\nJUSTIFICATIVA: O score de 22% está abaixo da média necessária para manter o tópico, mas há elementos relevantes para manter.",
+    "flaggado": true
+  }
+}
