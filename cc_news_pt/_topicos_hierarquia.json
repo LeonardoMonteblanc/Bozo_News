@@ -1,0 +1,215 @@
+[
+  {
+    "Parent_ID": "26",
+    "Parent_Name": "bolsonaro_os_feira_covid_pandemia",
+    "Topics": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "Child_Left_ID": "16",
+    "Child_Left_Name": "lula_pt_mg_juiz fora_fora mg",
+    "Child_Right_ID": "25",
+    "Child_Right_Name": "bolsonaro_os_covid_feira_pandemia",
+    "Distance": 0.9815409863780783
+  },
+  {
+    "Parent_ID": "25",
+    "Parent_Name": "bolsonaro_os_covid_feira_pandemia",
+    "Topics": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "Child_Left_ID": "19",
+    "Child_Left_Name": "bolsonaro_jair_jair bolsonaro_hospital_feira",
+    "Child_Right_ID": "24",
+    "Child_Right_Name": "covid_os_pandemia_vacinação_19",
+    "Distance": 0.9202138350925184
+  },
+  {
+    "Parent_ID": "24",
+    "Parent_Name": "covid_os_pandemia_vacinação_19",
+    "Topics": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      10,
+      11
+    ],
+    "Child_Left_ID": "21",
+    "Child_Left_Name": "moro_pf_polícia_sergio moro_sergio",
+    "Child_Right_ID": "23",
+    "Child_Right_Name": "covid_pandemia_vacinação_os_19",
+    "Distance": 0.8573068655487281
+  },
+  {
+    "Parent_ID": "23",
+    "Parent_Name": "covid_pandemia_vacinação_os_19",
+    "Topics": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      11
+    ],
+    "Child_Left_ID": "22",
+    "Child_Left_Name": "covid_pandemia_vacinação_19_os",
+    "Child_Right_ID": "4",
+    "Child_Right_Name": "fake_fake news_news_whatsapp_falsas",
+    "Distance": 0.8400489904612669
+  },
+  {
+    "Parent_ID": "22",
+    "Parent_Name": "covid_pandemia_vacinação_19_os",
+    "Topics": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      11
+    ],
+    "Child_Left_ID": "1",
+    "Child_Left_Name": "petrobras_preço_gasolina_combustíveis_preços",
+    "Child_Right_ID": "20",
+    "Child_Right_Name": "covid_pandemia_vacinação_19_os",
+    "Distance": 0.8239365327576275
+  },
+  {
+    "Parent_ID": "21",
+    "Parent_Name": "moro_pf_polícia_sergio moro_sergio",
+    "Topics": [
+      7,
+      10
+    ],
+    "Child_Left_ID": "10",
+    "Child_Left_Name": "polícia_pf_operação_lavagem dinheiro_lavagem",
+    "Child_Right_ID": "7",
+    "Child_Right_Name": "moro_sergio moro_sergio_ex_justiça",
+    "Distance": 0.7896732734455993
+  },
+  {
+    "Parent_ID": "20",
+    "Parent_Name": "covid_pandemia_vacinação_19_os",
+    "Topics": [
+      0,
+      2,
+      5,
+      6,
+      11
+    ],
+    "Child_Left_ID": "18",
+    "Child_Left_Name": "pandemia_os_bolsonaro_2020_coronavírus",
+    "Child_Right_ID": "0",
+    "Child_Right_Name": "vacinação_covid_vacina_19_covid 19",
+    "Distance": 0.7364194234221241
+  },
+  {
+    "Parent_ID": "19",
+    "Parent_Name": "bolsonaro_jair_jair bolsonaro_hospital_feira",
+    "Topics": [
+      3,
+      8,
+      9
+    ],
+    "Child_Left_ID": "8",
+    "Child_Left_Name": "venezuela_maduro_argentina_bolsonaro_países",
+    "Child_Right_ID": "15",
+    "Child_Right_Name": "bolsonaro_jair_jair bolsonaro_hospital_cirurgia",
+    "Distance": 0.726668902195377
+  },
+  {
+    "Parent_ID": "18",
+    "Parent_Name": "pandemia_os_bolsonaro_2020_coronavírus",
+    "Topics": [
+      2,
+      5,
+      6,
+      11
+    ],
+    "Child_Left_ID": "17",
+    "Child_Left_Name": "bolsonaro_stf_flávio_supremo_tribunal",
+    "Child_Right_ID": "14",
+    "Child_Right_Name": "pandemia_os_coronavírus_2020_auxílio",
+    "Distance": 0.6349680223276883
+  },
+  {
+    "Parent_ID": "17",
+    "Parent_Name": "bolsonaro_stf_flávio_supremo_tribunal",
+    "Topics": [
+      5,
+      11
+    ],
+    "Child_Left_ID": "11",
+    "Child_Left_Name": "stf_bolsonaro_flávio_tribunal_supremo",
+    "Child_Right_ID": "5",
+    "Child_Right_Name": "manifestantes_bolsonaro_manifestações_ato_atos",
+    "Distance": 0.5948865016388982
+  },
+  {
+    "Parent_ID": "16",
+    "Parent_Name": "lula_pt_mg_juiz fora_fora mg",
+    "Topics": [
+      12,
+      13
+    ],
+    "Child_Left_ID": "12",
+    "Child_Left_Name": "tarcísio_turno_governador_haddad_paulo",
+    "Child_Right_ID": "13",
+    "Child_Right_Name": "lula_pt_inácio_inácio lula_lula silva",
+    "Distance": 0.4660969479520227
+  },
+  {
+    "Parent_ID": "15",
+    "Parent_Name": "bolsonaro_jair_jair bolsonaro_hospital_cirurgia",
+    "Topics": [
+      3,
+      9
+    ],
+    "Child_Left_ID": "9",
+    "Child_Left_Name": "bolsonaro_jair bolsonaro_jair_feira_alvorada",
+    "Child_Right_ID": "3",
+    "Child_Right_Name": "hospital_cirurgia_bolsonaro_jair_jair bolsonaro",
+    "Distance": 0.4560879484380165
+  },
+  {
+    "Parent_ID": "14",
+    "Parent_Name": "pandemia_os_coronavírus_2020_auxílio",
+    "Topics": [
+      2,
+      6
+    ],
+    "Child_Left_ID": "2",
+    "Child_Left_Name": "pandemia_os_coronavírus_2020_auxílio",
+    "Child_Right_ID": "6",
+    "Child_Right_Name": "arte_arte cultura_cultura_portal holanda_portal",
+    "Distance": 0.4502446351224114
+  }
+]

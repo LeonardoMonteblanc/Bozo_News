@@ -1,0 +1,74 @@
+{
+  "versao": "t100-resplit-v4",
+  "config": {
+    "min_topic_size": 100,
+    "nr_topics": 6
+  },
+  "subtopicos": {
+    "200": {
+      "nome": "Vacinação e doses",
+      "total": 1850,
+      "palavras_bertopic": [
+        "vacinação",
+        "covid",
+        "19",
+        "vacina",
+        "saúde",
+        "covid 19",
+        "feira",
+        "anos",
+        "votuporanga",
+        "vacinação covid"
+      ]
+    },
+    "201": {
+      "nome": "Auxílio emergencial",
+      "total": 455,
+      "palavras_bertopic": [
+        "auxílio",
+        "emergencial",
+        "auxílio emergencial",
+        "caixa",
+        "parcela",
+        "milhões",
+        "feira",
+        "nascidos",
+        "família",
+        "2021"
+      ]
+    },
+    "202": {
+      "nome": "Lockdown e economia",
+      "total": 4136,
+      "palavras_bertopic": [
+        "pandemia",
+        "os",
+        "coronavírus",
+        "as",
+        "2020",
+        "não",
+        "feira",
+        "pelo",
+        "sobre",
+        "folha"
+      ]
+    },
+    "203": {
+      "nome": "Cloroquina e tratamento precoce",
+      "total": 106,
+      "palavras_bertopic": [
+        "cloroquina",
+        "hidroxicloroquina",
+        "covid",
+        "19",
+        "uso",
+        "covid 19",
+        "tratamento",
+        "pacientes",
+        "uso cloroquina",
+        "saúde"
+      ]
+    }
+  },
+  "gerado_em": "2026-10-11T04:33:59.207036"
+}

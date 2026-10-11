@@ -1,0 +1,98 @@
+[
+  {
+    "id": "100",
+    "nome_atual": "Pandemia e vacinação",
+    "nome_novo": "",
+    "total": 7435,
+    "julgamento": "errado",
+    "acao": "DESMEMBRAR"
+  },
+  {
+    "id": "11",
+    "nome_atual": "STF e Flávio Bolsonaro",
+    "nome_novo": "",
+    "total": 653,
+    "julgamento": "parcial",
+    "acao": "revisar"
+  },
+  {
+    "id": "13",
+    "nome_atual": "Lula e o PT",
+    "nome_novo": "",
+    "total": 547,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "9",
+    "nome_atual": "Bolsonaro e Palácio do Alvorada",
+    "nome_novo": "",
+    "total": 438,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "1",
+    "nome_atual": "Combustíveis e Petrobras",
+    "nome_novo": "",
+    "total": 425,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "5",
+    "nome_atual": "Manifestações políticas",
+    "nome_novo": "",
+    "total": 310,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "4",
+    "nome_atual": "Fake news e redes sociais",
+    "nome_novo": "",
+    "total": 201,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "7",
+    "nome_atual": "Sergio Moro e Justiça",
+    "nome_novo": "",
+    "total": 196,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "3",
+    "nome_atual": "Saúde e hospitais",
+    "nome_novo": "ESTADO DE SAUDE BOLSONARO",
+    "total": 183,
+    "julgamento": "parcial",
+    "acao": "renomear → ESTADO DE SAUDE BOLSONARO"
+  },
+  {
+    "id": "12",
+    "nome_atual": "Eleições estaduais SP",
+    "nome_novo": "",
+    "total": 160,
+    "julgamento": "parcial",
+    "acao": "revisar"
+  },
+  {
+    "id": "10",
+    "nome_atual": "Polícia Federal e operações",
+    "nome_novo": "",
+    "total": 130,
+    "julgamento": "correto",
+    "acao": "manter"
+  },
+  {
+    "id": "8",
+    "nome_atual": "América Latina e Venezuela",
+    "nome_novo": "",
+    "total": 100,
+    "julgamento": "correto",
+    "acao": "manter"
+  }
+]

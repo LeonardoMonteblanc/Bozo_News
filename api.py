@@ -3,26 +3,13 @@ API local — Corpus Bolsonaro 2019-2022.
 
 Roda em http://localhost:8000
 Lê corpus.db em modo somente-leitura.
-
-Endpoints:
-    GET /                       → index.html
-    GET /health                 → status
-    GET /api/noticias           → lista com filtros
-    GET /api/noticia/{id}       → detalhe
-    GET /api/timeline           → série temporal
-    GET /api/categorias         → contagem por categoria
-    GET /api/dominios           → contagem por domínio
-    GET /api/topicos            → lista de tópicos
-    GET /api/entidades          → top PER + ORG
-    GET /api/rede               → grafo de co-ocorrência
 """
-
 import os
 import json
 import time
 import sqlite3
 from collections import Counter
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import HTMLResponse
@@ -51,7 +38,8 @@ def db():
 def row_to_dict(row):
     d = dict(row)
     for campo in ("palavras_chave", "entidades_per", "entidades_org",
-                  "entidades_loc", "entidades_misc", "topico_palavras"):
+                  "entidades_loc", "entidades_misc",
+                  "topico_palavras", "topico_palavras_v2"):
         v = d.get(campo)
         if v:
             try:
@@ -79,7 +67,7 @@ def cache_set(chave, valor):
 
 # ========================= APP =========================
 
-app = FastAPI(title="Corpus Bolsonaro API", version="1.0")
+app = FastAPI(title="Corpus Bolsonaro API", version="2.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -106,7 +94,7 @@ def health():
     return {
         "status": "ok",
         "artigos_no_banco": n,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -141,7 +129,7 @@ def listar_noticias(
     if dominio:
         where.append("domain = ?"); params.append(dominio)
     if topico is not None:
-        where.append("topico_id = ?"); params.append(topico)
+        where.append("topico_id_v3 = ?"); params.append(topico)
     if sentimento:
         where.append("sentimento_label = ?"); params.append(sentimento)
     if entidade:
@@ -158,7 +146,8 @@ def listar_noticias(
         """
         sql_data = f"""
             SELECT a.id, a.data, a.titulo, a.resumo, a.url, a.sitename,
-                   a.categoria, a.sentimento_label, a.topico_id,
+                   a.categoria, a.sentimento_label,
+                   a.topico_id, a.topico_id_v3, a.topico_nome_v3,
                    a.entidades_per, a.entidades_org, a.bolsonaro_score
             FROM articles a
             JOIN articles_fts f ON f.rowid = a.id
@@ -178,7 +167,8 @@ def listar_noticias(
         sql_count = f"SELECT COUNT(*) FROM articles WHERE {where_sql}"
         sql_data = f"""
             SELECT id, data, titulo, resumo, url, sitename,
-                   categoria, sentimento_label, topico_id,
+                   categoria, sentimento_label,
+                   topico_id, topico_id_v3, topico_nome_v3,
                    entidades_per, entidades_org, bolsonaro_score
             FROM articles
             WHERE {where_sql}
@@ -293,30 +283,24 @@ def dominios(limite: int = 30):
 
 @app.get("/api/topicos")
 def topicos():
-    chave = "topicos"
+    chave = "topicos_v5"
     cached = cache_get(chave)
     if cached:
         return cached
 
     conn = db()
     rows = conn.execute(f"""
-        SELECT topico_id, COUNT(*) AS total,
-               MAX(topico_palavras) AS palavras
+        SELECT topico_id_v5 AS topico_id,
+               topico_nome_v5 AS nome,
+               COUNT(*) AS total
         FROM articles
-        WHERE {FILTRO_BASE} AND topico_id IS NOT NULL
-        GROUP BY topico_id ORDER BY total DESC
+        WHERE {FILTRO_BASE} AND topico_id_v5 IS NOT NULL
+        GROUP BY topico_id_v5
+        ORDER BY total DESC
     """).fetchall()
     conn.close()
 
-    res = []
-    for r in rows:
-        d = dict(r)
-        try:
-            d["palavras"] = json.loads(d["palavras"]) if d["palavras"] else []
-        except Exception:
-            d["palavras"] = []
-        res.append(d)
-
+    res = [dict(r) for r in rows]
     cache_set(chave, res)
     return res
 
@@ -402,6 +386,203 @@ def rede(limite: int = 30, min_cooc: int = 3):
     }
     cache_set(chave, res)
     return res
+
+
+# ========================= PALAVRAS-CHAVE =========================
+
+@app.get("/api/palavras_chave")
+def palavras_chave(limite: int = 100, min_freq: int = 3):
+    chave = f"kw|{limite}|{min_freq}"
+    cached = cache_get(chave)
+    if cached:
+        return cached
+
+    conn = db()
+    rows = conn.execute(f"""
+        SELECT palavras_chave FROM articles
+        WHERE {FILTRO_BASE}
+          AND palavras_chave IS NOT NULL AND palavras_chave != '[]'
+    """).fetchall()
+    conn.close()
+
+    freq = Counter()
+    for r in rows:
+        try:
+            kws = json.loads(r["palavras_chave"])
+        except Exception:
+            continue
+        for kw in kws:
+            k = str(kw).strip().lower()
+            if len(k) < 4 or len(k) > 40:
+                continue
+            freq[k] += 1
+
+    resultado = [
+        {"palavra": p, "total": n}
+        for p, n in freq.most_common(limite) if n >= min_freq
+    ]
+    cache_set(chave, resultado)
+    return resultado
+
+
+# ========================= SUGESTÕES =========================
+
+@app.get("/api/sugestoes")
+def sugestoes(q: str = ""):
+    q = (q or "").strip().lower()
+    if len(q) < 2:
+        return {"entidades": [], "topicos": [], "categorias": [], "total_noticias": 0}
+
+    conn = db()
+    like = f"%{q}%"
+
+    total = conn.execute(f"""
+        SELECT COUNT(*) AS n FROM articles
+        WHERE {FILTRO_BASE}
+          AND (LOWER(titulo) LIKE ? OR LOWER(resumo) LIKE ?)
+    """, (like, like)).fetchone()["n"]
+
+    ent_rows = conn.execute(f"""
+        SELECT entidades_per, entidades_org FROM articles
+        WHERE {FILTRO_BASE}
+          AND (LOWER(entidades_per) LIKE ? OR LOWER(entidades_org) LIKE ?)
+        LIMIT 300
+    """, (like, like)).fetchall()
+
+    ent_map = Counter()
+    for r in ent_rows:
+        for campo in ("entidades_per", "entidades_org"):
+            try:
+                for e in json.loads(r[campo] or "[]"):
+                    if q in str(e).lower():
+                        ent_map[str(e)] += 1
+            except Exception:
+                pass
+
+    entidades = [{"nome": n, "total": c} for n, c in ent_map.most_common(5)]
+
+    # Tópicos — usa colunas v5
+    top_rows = conn.execute(f"""
+    SELECT topico_id_v5 AS topico_id,
+           topico_nome_v5 AS nome,
+           COUNT(*) AS total
+    FROM articles
+    WHERE {FILTRO_BASE} AND topico_id_v5 IS NOT NULL
+    GROUP BY topico_id_v5
+""").fetchall()
+
+    topicos = []
+    for r in top_rows:
+        nome = r["nome"] or ""
+        if q in nome.lower():
+            topicos.append({
+                "id": r["topico_id"],
+                "nome": nome,
+                "total": r["total"],
+            })
+
+    cat_rows = conn.execute(f"""
+        SELECT categoria, COUNT(*) AS total FROM articles
+        WHERE {FILTRO_BASE} AND LOWER(categoria) LIKE ?
+        GROUP BY categoria ORDER BY total DESC LIMIT 3
+    """, (like,)).fetchall()
+
+    conn.close()
+    return {
+        "entidades": entidades,
+        "topicos": topicos[:5],
+        "categorias": [{"nome": r["categoria"], "total": r["total"]} for r in cat_rows],
+        "total_noticias": total,
+    }
+
+
+# ========================= TÓPICOS COM PALAVRAS =========================
+@app.get("/api/topicos_com_palavras")
+@app.get("/api/topicos_com_palavras")
+def topicos_com_palavras(limite: int = 20, palavras_por_topico: int = 15):
+    """
+    Retorna cada tópico final (v5) com as palavras mais frequentes.
+    Filtra ruído: nomes de veículos, Bolsonaro, termos genéricos.
+    """
+    chave = f"tcp5|{limite}|{palavras_por_topico}"
+    cached = cache_get(chave)
+    if cached:
+        return cached
+
+    BLACKLIST = {
+        "jair bolsonaro", "bolsonaro", "jair", "presidente jair",
+        "presidente", "folhapress", "agência brasil", "agencia brasil",
+        "estadão conteúdo", "estadao conteudo", "reuters", "brasil",
+        "paulo", "são paulo", "sao paulo", "reprodução", "reproducao",
+        "foto", "imagem", "g1", "globo", "uol", "folha",
+        "ministério", "ministerio", "governo", "federal", "nacional",
+    }
+
+    conn = db()
+    rows = conn.execute(f"""
+        SELECT
+            a.topico_id_v5 AS topico_id,
+            j.value AS palavra,
+            COUNT(*) AS total
+        FROM articles a, json_each(a.palavras_chave) j
+        WHERE {FILTRO_BASE}
+          AND a.topico_id_v5 IS NOT NULL
+          AND a.palavras_chave IS NOT NULL
+          AND length(j.value) >= 5
+        GROUP BY a.topico_id_v5, j.value
+        ORDER BY a.topico_id_v5, total DESC
+    """).fetchall()
+
+    meta_rows = conn.execute(f"""
+        SELECT topico_id_v5 AS topico_id,
+               topico_nome_v5 AS nome,
+               COUNT(*) AS total,
+               MAX(topico_palavras_v2) AS palavras
+        FROM articles
+        WHERE {FILTRO_BASE} AND topico_id_v5 IS NOT NULL
+        GROUP BY topico_id_v5
+        ORDER BY total DESC
+        LIMIT ?
+    """, (limite,)).fetchall()
+    conn.close()
+
+    por_topico = {}
+    for r in rows:
+        tid = r["topico_id"]
+        pal = r["palavra"].lower().strip()
+        if pal in BLACKLIST:
+            continue
+        if pal.startswith("bolsonaro ") or pal.endswith(" bolsonaro"):
+            continue
+        if pal.startswith("presidente "):
+            continue
+        if tid not in por_topico:
+            por_topico[tid] = []
+        if len(por_topico[tid]) < palavras_por_topico:
+            por_topico[tid].append({
+                "palavra": r["palavra"],
+                "total": r["total"],
+            })
+
+    resultado = []
+    for m in meta_rows:
+        tid = m["topico_id"]
+        try:
+            keywords_bertopic = json.loads(m["palavras"] or "[]")
+        except Exception:
+            keywords_bertopic = []
+        resultado.append({
+            "id": tid,
+            "nome": m["nome"] or f"Tópico {tid}",
+            "total": m["total"],
+            "keywords_bertopic": keywords_bertopic[:8],
+            "palavras_top": por_topico.get(tid, []),
+        })
+
+    cache_set(chave, resultado)
+    return resultado
+
+
 
 
 # ========================= MAIN =========================

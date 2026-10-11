@@ -1,0 +1,227 @@
+{
+  "versao": "bertopic-v2-hierarquico",
+  "config": {
+    "min_topic_size": 100,
+    "nr_topics": 25,
+    "n_gram": [
+      1,
+      2
+    ],
+    "min_dist": 0.0,
+    "min_df": 5,
+    "stopwords_count": 80
+  },
+  "topicos": {
+    "0": {
+      "palavras_bertopic": [
+        "vacinação",
+        "covid",
+        "vacina",
+        "19",
+        "covid 19",
+        "saúde",
+        "anos",
+        "votuporanga",
+        "vacinas",
+        "feira"
+      ],
+      "total": 1891
+    },
+    "1": {
+      "palavras_bertopic": [
+        "petrobras",
+        "preço",
+        "gasolina",
+        "combustíveis",
+        "preços",
+        "gás",
+        "óleo",
+        "icms",
+        "venda",
+        "combustível"
+      ],
+      "total": 425
+    },
+    "2": {
+      "palavras_bertopic": [
+        "pandemia",
+        "os",
+        "coronavírus",
+        "2020",
+        "auxílio",
+        "as",
+        "covid",
+        "19",
+        "paulo",
+        "não"
+      ],
+      "total": 5544
+    },
+    "3": {
+      "palavras_bertopic": [
+        "hospital",
+        "cirurgia",
+        "bolsonaro",
+        "jair",
+        "jair bolsonaro",
+        "boletim",
+        "internado",
+        "médico",
+        "alta",
+        "feira"
+      ],
+      "total": 183
+    },
+    "4": {
+      "palavras_bertopic": [
+        "fake",
+        "fake news",
+        "news",
+        "whatsapp",
+        "falsas",
+        "as",
+        "sobre",
+        "sociais",
+        "redes",
+        "os"
+      ],
+      "total": 201
+    },
+    "5": {
+      "palavras_bertopic": [
+        "manifestantes",
+        "bolsonaro",
+        "manifestações",
+        "ato",
+        "atos",
+        "manifestação",
+        "bolsonaristas",
+        "protestos",
+        "paulo",
+        "brasília"
+      ],
+      "total": 310
+    },
+    "6": {
+      "palavras_bertopic": [
+        "arte",
+        "arte cultura",
+        "cultura",
+        "portal holanda",
+        "portal",
+        "holanda",
+        "publicado",
+        "paulo",
+        "paulo portal",
+        "folha paulo"
+      ],
+      "total": 196
+    },
+    "7": {
+      "palavras_bertopic": [
+        "moro",
+        "sergio moro",
+        "sergio",
+        "ex",
+        "justiça",
+        "sérgio moro",
+        "sérgio",
+        "pf",
+        "justiça segurança",
+        "bolsonaro"
+      ],
+      "total": 196
+    },
+    "8": {
+      "palavras_bertopic": [
+        "venezuela",
+        "maduro",
+        "argentina",
+        "bolsonaro",
+        "países",
+        "eua",
+        "os",
+        "mourão",
+        "fronteira",
+        "trump"
+      ],
+      "total": 100
+    },
+    "9": {
+      "palavras_bertopic": [
+        "bolsonaro",
+        "jair bolsonaro",
+        "jair",
+        "feira",
+        "alvorada",
+        "palácio",
+        "nesta",
+        "brasília",
+        "palácio alvorada",
+        "não"
+      ],
+      "total": 438
+    },
+    "10": {
+      "palavras_bertopic": [
+        "polícia",
+        "pf",
+        "operação",
+        "lavagem dinheiro",
+        "lavagem",
+        "dinheiro",
+        "criminosa",
+        "mandados",
+        "organização criminosa",
+        "organização"
+      ],
+      "total": 130
+    },
+    "11": {
+      "palavras_bertopic": [
+        "stf",
+        "bolsonaro",
+        "flávio",
+        "tribunal",
+        "supremo",
+        "flávio bolsonaro",
+        "inquérito",
+        "supremo tribunal",
+        "justiça",
+        "polícia"
+      ],
+      "total": 653
+    },
+    "12": {
+      "palavras_bertopic": [
+        "tarcísio",
+        "turno",
+        "governador",
+        "haddad",
+        "paulo",
+        "candidato",
+        "ex",
+        "psdb",
+        "sp",
+        "tarcísio freitas"
+      ],
+      "total": 160
+    },
+    "13": {
+      "palavras_bertopic": [
+        "lula",
+        "pt",
+        "inácio",
+        "inácio lula",
+        "lula silva",
+        "luiz inácio",
+        "silva",
+        "luiz",
+        "mg",
+        "juiz fora"
+      ],
+      "total": 547
+    }
+  },
+  "gerado_em": "2026-10-11T02:42:49.824588"
+}

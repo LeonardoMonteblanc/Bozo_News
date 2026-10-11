@@ -1,0 +1,51 @@
+{
+  "1": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:14:56.670Z"
+  },
+  "3": {
+    "nome_alternativo": "ESTADO DE SAUDE BOLSONARO",
+    "julgamento": "parcial",
+    "revisado_em": "2026-10-11T04:16:04.271Z"
+  },
+  "4": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:15:18.789Z"
+  },
+  "5": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:15:08.069Z"
+  },
+  "7": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:15:29.811Z"
+  },
+  "8": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:16:34.943Z"
+  },
+  "9": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:14:47.552Z"
+  },
+  "10": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:16:27.112Z"
+  },
+  "11": {
+    "julgamento": "parcial",
+    "revisado_em": "2026-10-11T04:14:21.000Z"
+  },
+  "12": {
+    "julgamento": "parcial",
+    "revisado_em": "2026-10-11T04:16:18.295Z"
+  },
+  "13": {
+    "julgamento": "correto",
+    "revisado_em": "2026-10-11T04:14:37.337Z"
+  },
+  "100": {
+    "julgamento": "errado",
+    "revisado_em": "2026-10-11T04:14:01.146Z"
+  }
+}

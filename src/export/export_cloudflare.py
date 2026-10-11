@@ -2,16 +2,18 @@
 Export corpus.db → D1 (SQL) + R2 (JSON por artigo).
 
 Estrutura esperada:
-  banco/corpus.db              (entrada)
+  corpus.db                    (entrada)
   work_data/export_d1/         (saída SQL para D1)
   export_r2/arts/              (saída JSON para R2)
+
+Usa colunas topico_id_v5 e topico_nome_v5 (tópicos finais).
 """
 import json
 import os
 import sqlite3
 from pathlib import Path
 
-DB_FILE  = "banco/corpus.db"
+DB_FILE  = "corpus.db"
 OUT_D1   = "work_data/export_d1"
 OUT_R2   = "export_r2"
 
@@ -44,13 +46,15 @@ def main():
                entidades_per, entidades_org, entidades_loc, entidades_misc,
                palavras_chave, n_palavras, n_chars,
                mention_bolsonaro, relevance_bolsonaro,
-               bolsonaro_score, quality_score, texto_limpo
+               bolsonaro_score, quality_score, texto_limpo,
+               topico_id_v5, topico_nome_v5
         FROM articles
         WHERE {FILTRO}
         ORDER BY id
     """).fetchall()
     print(f"    {len(rows):,} artigos")
 
+    # ==================== Schema ====================
     schema = """
 CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY,
@@ -63,12 +67,13 @@ CREATE TABLE IF NOT EXISTS articles (
     palavras_chave TEXT,
     n_palavras INTEGER, n_chars INTEGER,
     mention_bolsonaro INTEGER, relevance_bolsonaro INTEGER,
-    bolsonaro_score REAL, quality_score REAL, r2_key TEXT
+    bolsonaro_score REAL, quality_score REAL, r2_key TEXT,
+    topico_id_v5 INTEGER, topico_nome_v5 TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_data      ON articles(data);
 CREATE INDEX IF NOT EXISTS idx_categoria ON articles(categoria);
 CREATE INDEX IF NOT EXISTS idx_domain    ON articles(domain);
-CREATE INDEX IF NOT EXISTS idx_topico    ON articles(topico_id);
+CREATE INDEX IF NOT EXISTS idx_topico_v5 ON articles(topico_id_v5);
 CREATE INDEX IF NOT EXISTS idx_bolso     ON articles(relevance_bolsonaro);
 CREATE VIRTUAL TABLE IF NOT EXISTS articles_fts USING fts5(
     titulo, resumo,
@@ -84,19 +89,21 @@ END;
         f.write(schema)
     print(f"[2] schema.sql escrito")
 
-    cols = ["id","hash","data","titulo","resumo","url","domain","sitename",
-            "autor","categoria","sentimento_label","sentimento_compound",
-            "topico_id","topico_palavras",
-            "entidades_per","entidades_org","entidades_loc","entidades_misc",
-            "palavras_chave","n_palavras","n_chars",
-            "mention_bolsonaro","relevance_bolsonaro",
-            "bolsonaro_score","quality_score","r2_key"]
+    # ==================== INSERTs ====================
+    cols = ["id", "hash", "data", "titulo", "resumo", "url", "domain", "sitename",
+            "autor", "categoria", "sentimento_label", "sentimento_compound",
+            "topico_id", "topico_palavras",
+            "entidades_per", "entidades_org", "entidades_loc", "entidades_misc",
+            "palavras_chave", "n_palavras", "n_chars",
+            "mention_bolsonaro", "relevance_bolsonaro",
+            "bolsonaro_score", "quality_score", "r2_key",
+            "topico_id_v5", "topico_nome_v5"]
     col_list = ",".join(cols)
 
     print(f"[3] Gerando INSERTs em lotes de {BATCH_SQL}...")
     n_sql = 0
     for inicio in range(0, len(rows), BATCH_SQL):
-        lote = rows[inicio:inicio+BATCH_SQL]
+        lote = rows[inicio:inicio + BATCH_SQL]
         idx = inicio // BATCH_SQL
         path = f"{OUT_D1}/data_{idx:04d}.sql"
         with open(path, "w", encoding="utf-8") as f:
@@ -114,12 +121,16 @@ END;
                     r["n_palavras"], r["n_chars"],
                     r["mention_bolsonaro"], r["relevance_bolsonaro"],
                     r["bolsonaro_score"], r["quality_score"], r2_key,
+                    r["topico_id_v5"], r["topico_nome_v5"],
                 ]
-                f.write(f"INSERT OR REPLACE INTO articles ({col_list}) "
-                        f"VALUES ({','.join(sql_escape(v) for v in vals)});\n")
+                f.write(
+                    f"INSERT OR REPLACE INTO articles ({col_list}) "
+                    f"VALUES ({','.join(sql_escape(v) for v in vals)});\n"
+                )
         n_sql += 1
     print(f"    {n_sql} arquivos SQL")
 
+    # ==================== R2 ====================
     print("[4] Gerando JSONs R2...")
     for r in rows:
         payload = {
