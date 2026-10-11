@@ -5,7 +5,7 @@ Executar: python -m pytest tests/test_api_endpoints.py -v
 import pytest
 import json
 from fastapi.testclient import TestClient
-from src.api import app
+from api import app
 from src.api.routes.noticias import listar_noticias
 from src.api.routes.topicos import listar_topicos, topicos_com_palavras
 from src.api.routes.entidades import listar_entidades, rede
