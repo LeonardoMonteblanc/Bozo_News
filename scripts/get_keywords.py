@@ -4,13 +4,20 @@ Preenche o campo `palavras_chave` dos artigos do subset Bolsonaro.
 Roda YAKE sobre o texto_limpo de cada artigo, em paralelo.
 Atualiza o corpus.db local.
 """
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import sqlite3
 import json
 import time
 import multiprocessing as mp
 
 
-DB_FILE = "corpus.db"
+DB_FILE = str(DB_FILE)
 N_WORKERS = 4
 BATCH_DB = 200
 TOP_N = 8          # palavras-chave por artigo

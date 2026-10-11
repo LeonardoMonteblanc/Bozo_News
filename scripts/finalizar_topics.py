@@ -1,4 +1,11 @@
 """Aplica nomes curados finais aos subtópicos e renumera."""
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import sqlite3
 
 # Mapa final v4 → nome curado
@@ -31,7 +38,7 @@ REMAP = {
     301: 102,   # Pandemia Coronavírus → Pandemia de COVID-19
 }
 
-DB = "corpus.db"
+DB = str(DB_FILE)
 
 conn = sqlite3.connect(DB, timeout=60)
 cur = conn.cursor()

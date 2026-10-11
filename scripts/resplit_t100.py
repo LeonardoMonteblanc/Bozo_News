@@ -9,12 +9,19 @@ Saída:
 - cc_news_pt/_t100_split.json
 - corpus.db atualizado com topico_id_v4 + topico_nome_v4
 """
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import json
 import time
 import sqlite3
 from datetime import datetime
 
-DB_FILE = "corpus.db"
+DB_FILE = str(DB_FILE)
 OUT_DIR = "cc_news_pt"
 MODEL_EMBEDDINGS = "paraphrase-multilingual-MiniLM-L12-v2"
 

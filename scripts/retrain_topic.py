@@ -6,6 +6,13 @@ Saída:
   - cc_news_pt/_topicos_hierarquia.json (árvore de hierarquia)
   - corpus.db atualizado com novo topico_id
 """
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import os
 import json
 import time
@@ -15,7 +22,7 @@ from datetime import datetime
 
 # ========================= CONFIG =========================
 
-DB_FILE = "corpus.db"
+DB_FILE = str(DB_FILE)
 OUT_DIR = "cc_news_pt"
 MODEL_EMBEDDINGS = "paraphrase-multilingual-MiniLM-L12-v2"
 

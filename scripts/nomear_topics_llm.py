@@ -3,6 +3,13 @@ Gera nomes curados via LLM (few-shot) para os tópicos consolidados.
 
 Saída: cc_news_pt/_topicos_v4.json + corpus.db atualizado
 """
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import json
 import time
 import sqlite3
@@ -12,7 +19,7 @@ from datetime import datetime
 
 # ========================= CONFIG =========================
 
-DB_FILE = "corpus.db"
+DB_FILE = str(DB_FILE)
 INPUT = "cc_news_pt/_topicos_v3.json"
 OUTPUT = "cc_news_pt/_topicos_v4.json"
 OLLAMA_URL = "http://localhost:11434/api/generate"

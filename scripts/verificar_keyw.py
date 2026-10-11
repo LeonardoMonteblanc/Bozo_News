@@ -1,5 +1,12 @@
+
+import sys
+from pathlib import Path as _P
+sys.path.insert(0, str(_P(__file__).resolve().parent.parent))
+from src.paths import PROJECT_ROOT, DB_FILE
+import os as _os
+_os.chdir(PROJECT_ROOT)
 import sqlite3
-conn = sqlite3.connect("corpus.db")
+conn = sqlite3.connect(DB_FILE)
 cur = conn.cursor()
 
 print("=== Colunas adicionadas ===")

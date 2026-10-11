@@ -12,10 +12,13 @@ import json
 import os
 import sqlite3
 from pathlib import Path
+import sys
 
-DB_FILE  = "corpus.db"
-OUT_D1   = "work_data/export_d1"
-OUT_R2   = "export_r2"
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from src.paths import DB_FILE, WORK_DATA, EXPORT_R2
+
+OUT_D1   = WORK_DATA / "export_d1"
+OUT_R2   = EXPORT_R2
 
 FILTRO    = "mention_bolsonaro = 1"
 BATCH_SQL = 500
